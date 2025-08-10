@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campeonato Enduro/Motocross - Patagonia</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Roboto:wght@400;700&display=swap');
+
+        :root {
+            --color-principal: #FF4500;
+            --color-fondo: #FFFFFF;
+            --color-texto: #333333;
+            --color-dark-bg: #1a1a1a;
+            --color-light-gray: #f4f4f4;
+            --font-titulos: 'Oswald', sans-serif;
+            --font-cuerpo: 'Roboto', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-cuerpo);
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-titulos);
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        #page-inicio, .results-view {
+            display: none;
+            padding: 60px 20px;
+            background-color: var(--color-light-gray);
+        }
+        .placeholder-text {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .main-header {
+            background-color: rgba(26, 26, 26, 0.9);
+            padding: 10px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo { max-width: 160px; z-index: 1001; }
+        .main-nav ul { margin: 0; padding: 0; list-style: none; display: flex; align-items: center; }
+        .main-nav a { color: white; text-decoration: none; padding: 15px 20px; display: block; font-family: var(--font-titulos); font-weight: 500; transition: background-color 0.3s, color 0.3s; border-radius: 4px; }
+        .main-nav a:hover { background-color: var(--color-principal); color: white; }
+        .hamburger-btn { display: none; cursor: pointer; font-size: 2rem; color: white; background: none; border: none; }
+        .dropdown { position: relative; }
+        .dropdown-content { display: none; position: absolute; background-color: #333; min-width: 220px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 1; border-radius: 4px; overflow: hidden; max-height: 400px; overflow-y: auto; }
+        .dropdown-content a { padding: 12px 16px; }
+        .dropdown:hover .dropdown-content { display: block; }
+
+        #page-inicio .hero-section {
+            padding: 0;
+            background: #1a1a1a;
+        }
+        .hero-section {
+            position: relative;
+            height: 85vh;
+            color: white;
+            overflow: hidden;
+        }
+        .hero-gallery {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+        .gallery-item {
+            flex: 1;
+            height: 100%;
+            overflow: hidden;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
+        .hero-section .hero-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+            text-align: center;
+            width: 90%;
+        }
+        .hero-section .hero-text h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+        }
+        .hero-section .hero-text p {
+            font-size: 1.5rem;
+            font-family: var(--font-cuerpo);
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+        }
+
+        #page-inicio .dates-section { padding: 60px 20px; background-color: var(--color-fondo); }
+        .dates-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; justify-content: center; align-items: start; }
+        .promo-image { width: 100%; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .promo-image:hover { transform: translateY(-10px); box-shadow: 0 12px 30px rgba(0,0,0,0.2); }
+
+        #page-inicio .news-section { padding: 60px 20px; background-color: var(--color-light-gray); }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 40px; border-bottom: 3px solid var(--color-principal); display: inline-block; padding-bottom: 10px; }
+        .center-title { display: flex; justify-content: center; }
+        .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .news-card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease; }
+        .news-card:hover { transform: translateY(-10px); }
+        .news-card img { width: 100%; height: 200px; object-fit: cover; }
+        .news-card-content { padding: 20px; }
+        .news-card h3 { margin-top: 0; color: var(--color-principal); }
+
+        #page-inicio .video-section { padding: 60px 20px; background-color: white; }
+        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 1000px; margin: 0 auto; border: 5px solid var(--color-dark-bg); border-radius: 8px; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+        .ranking-top3 { display: flex; justify-content: center; gap: 30px; margin-bottom: 50px; flex-wrap: wrap; }
+        .pilot-card { background-color: white; border-radius: 10px; text-align: center; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s; width: 250px; }
+        .pilot-card:hover { transform: scale(1.05); }
+        .pilot-card img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 5px solid; }
+        .pilot-card.p1 img { border-color: #FFD700; }
+        .pilot-card.p2 img { border-color: #C0C0C0; }
+        .pilot-card.p3 img { border-color: #CD7F32; }
+        .pilot-card h3 { margin: 15px 0 5px 0; font-size: 1.5rem; }
+        .pilot-card .place { font-size: 1.2rem; font-weight: bold; color: var(--color-principal); }
+        .results-table-wrapper { overflow-x: auto; }
+        .results-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .results-table th, .results-table td { border: 1px solid #ddd; padding: 12px; text-align: center; }
+        .results-table th { background-color: var(--color-dark-bg); color: white; font-family: var(--font-titulos); }
+        .results-table tbody tr:nth-child(even) { background-color: #f9f9f9; }
+        .results-table tbody tr:hover { background-color: #f1f1f1; }
+
+        .main-footer { background-color: var(--color-dark-bg); padding: 40px 20px; }
+        .sponsors-grid { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 40px; }
+        .sponsor-logo { max-height: 70px; max-width: 200px; transition: transform 0.3s ease; }
+        .sponsor-logo:hover { transform: scale(1.05); }
+
+        @media (max-width: 768px) {
+            .main-header { padding: 10px 20px; }
+            .hero-section { height: auto; flex-direction: column; }
+            .hero-gallery { flex-direction: column; }
+            .hero-section .hero-text { position: relative; transform: none; top: auto; left: auto; padding: 40px 20px; background-color: rgba(0, 0, 0, 0.7); }
+            .hero-section .hero-text h1 { font-size: 2.5rem; }
+            .hero-section .hero-text p { font-size: 1.2rem; }
+            .main-nav .nav-links { display: none; flex-direction: column; width: 100%; position: absolute; top: 70px; left: 0; background-color: var(--color-dark-bg); text-align: center; }
+            .main-nav .nav-links.active { display: flex; }
+            .main-nav .dropdown:hover .dropdown-content { display: none; }
+            .hamburger-btn { display: block; }
+            .dates-grid { grid-template-columns: 1fr; gap: 30px; }
+            .ranking-top3 { flex-direction: column; align-items: center; }
+            .ranking-top3 .p1 { order: 1; }
+            .ranking-top3 .p2 { order: 2; }
+            .ranking-top3 .p3 { order: 3; }
+        }
+
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <a href="#" class="nav-link" data-target="page-inicio"><img src="auspicios/auspicio_1.jpeg" alt="Logo Patagonia Moto Club" class="logo"></a>
+        <nav class="main-nav">
+            <button class="hamburger-btn" id="hamburger-btn">☰</button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#" class="nav-link" data-target="page-inicio">Inicio</a></li>
+                <li><a href="#">Reglamento</a></li>
+                <li class="dropdown">
+                    <a href="#">Resultados</a>
+                    <div class="dropdown-content">
+                        <a href="#" class="nav-link" data-target="view-atv-experto">ATV EXPERTO</a>
+                        <a href="#" class="nav-link" data-target="view-atv-master-a">ATV MASTER A</a>
+                        <a href="#" class="nav-link" data-target="view-atv-open">ATV OPEN</a>
+                        <a href="#" class="nav-link" data-target="view-atv-master-b">ATV MASTER B</a>
+                        <a href="#" class="nav-link" data-target="view-atv-master-c">ATV MASTER C</a>
+                        <a href="#" class="nav-link" data-target="view-atv-promocional">ATV PROMOCIONAL</a>
+                        <a href="#" class="nav-link" data-target="view-moto-experto">MOTO EXPERTO</a>
+                        <a href="#" class="nav-link" data-target="view-moto-master-a">MOTO MASTER A</a>
+                        <a href="#" class="nav-link" data-target="view-motos-open">MOTOS OPEN</a>
+                        <a href="#" class="nav-link" data-target="view-moto-master-b">MOTO MASTER B</a>
+                        <a href="#" class="nav-link" data-target="view-moto-master-c">MOTO MASTER C</a>
+                        <a href="#" class="nav-link" data-target="view-moto-promocional">MOTO PROMOCIONAL</a>
+                        <a href="#" class="nav-link" data-target="view-4x4">4X4</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div id="page-inicio">
+            <section class="hero-section">
+                <div class="hero-gallery">
+                    <div class="gallery-item"><img src="wallpapers/wallpaper_1.png" alt="Imagen de Enduro 1"></div>
+                    <div class="gallery-item"><img src="wallpapers/wallpaper_2.png" alt="Imagen de Enduro 2"></div>
+                    <div class="gallery-item"><img src="wallpapers/wallpaper_3.png" alt="Imagen de Enduro 3"></div>
+                    <div class="gallery-item"><img src="wallpapers/wallpaper_4.png" alt="Imagen de Enduro 4"></div>
+                    <div class="gallery-item"><img src="wallpapers/wallpaper_5.png" alt="Imagen de Enduro 5"></div>
+                </div>
+                <div class="hero-text">
+                    <h1>Campeonato de Enduro y Motocross de Magallanes, Chile</h1>
+                    <p>El campeonato más desafiante de la Patagonia</p>
+                </div>
+            </section>
+            <section class="dates-section">
+                <div class="container">
+                    <div class="center-title"><h2 class="section-title">Próximas Fechas 2025-2026</h2></div>
+                    <div class="dates-grid">
+                        <img src="promocionales/promocional_campeonato_2025_1.jpeg" alt="Fechas Campeonato Enduro 2025-2026" class="promo-image">
+                        <img src="promocionales/promocional_campeonato_2025_2.jpeg" alt="Fechas Campeonato Motocross 2025-2026" class="promo-image">
+                    </div>
+                </div>
+            </section>
+            <section class="news-section">
+                <div class="container">
+                    <div class="center-title"><h2 class="section-title">Últimas Noticias</h2></div>
+                    <div class="news-grid">
+                        <div class="news-card">
+                            <img src="pilotos/piloto_3.jpeg" alt="Piloto en carrera">
+                            <div class="news-card-content">
+                                <h3>Fecha 3: Un Desafío en el barro</h3>
+                                <p>Revive los mejores momentos de la última carrera, donde los pilotos demostraron su destreza en condiciones extremas.</p>
+                            </div>
+                        </div>
+                        <div class="news-card">
+                            <img src="pilotos/piloto_1.jpeg" alt="Piloto preparándose">
+                            <div class="news-card-content">
+                                <h3>Abiertas las inscripciones para la próxima temporada</h3>
+                                <p>No te quedes fuera. Asegura tu lugar en la parrilla de salida y prepárate para competir al más alto nivel.</p>
+                            </div>
+                        </div>
+                        <div class="news-card">
+                            <img src="pilotos/piloto_2.jpeg" alt="Piloto saltando">
+                            <div class="news-card-content">
+                                <h3>Nuevos patrocinadores se unen al campeonato</h3>
+                                <p>Gracias al apoyo de nuevas marcas, el campeonato crece y ofrecerá mejores premios y organización.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="video-section">
+                <div class="container">
+                    <div class="center-title"><h2 class="section-title">Videos Destacados</h2></div>
+                    <div class="video-wrapper">
+                        <iframe
+                            src="https://www.youtube.com/embed/ianI0icQZfw"
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="view-atv-experto" class="results-view">
+            <div class="container">
+                <div class="center-title"><h2 class="section-title">Resultados: ATV Experto</h2></div>
+                <div class="ranking-top3">
+                    <div class="pilot-card p2"><img src="pilotos/piloto_2.jpeg" alt="Foto de Ignacio Diaz"><h3>Ignacio Diaz</h3><p class="place">2do Lugar - 208 Puntos</p></div>
+                    <div class="pilot-card p1"><img src="pilotos/piloto_1.jpeg" alt="Foto de Bastian Vargas"><h3>Bastian Vargas</h3><p class="place">1er Lugar - 214 Puntos</p></div>
+                    <div class="pilot-card p3"><img src="pilotos/piloto_3.jpeg" alt="Foto de Gonzalo Marquez"><h3>Gonzalo Marquez</h3><p class="place">3er Lugar - 134 Puntos</p></div>
+                </div>
+                <div class="results-table-wrapper">
+                    <table class="results-table">
+                        <thead>
+                            <tr><th>Categoría</th><th>N°</th><th>Nombre Piloto</th><th>1ª Fecha</th><th>2ª Fecha</th><th>3ª Fecha</th><th>4ª Fecha</th><th>5ª Fecha</th><th>6ª Fecha</th><th>Total</th><th>Lugar</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>ATV EXPERTO</td><td>106</td><td>BASTIAN VARGAS</td><td>40</td><td>34</td><td>40</td><td>30</td><td>40</td><td>30</td><td>214</td><td>1</td></tr>
+                            <tr><td>ATV EXPERTO</td><td>2</td><td>IGNACIO DIAZ</td><td>34</td><td>40</td><td>34</td><td>40</td><td>34</td><td>26</td><td>208</td><td>2</td></tr>
+                            <tr><td>ATV EXPERTO</td><td>43</td><td>GONZALO MARQUEZ</td><td>22</td><td>22</td><td>22</td><td>26</td><td>22</td><td>20</td><td>134</td><td>3</td></tr>
+                            <tr><td>ATV EXPERTO</td><td>1</td><td>IVAN PABLO CUEVAS</td><td>30</td><td>30</td><td>N/P</td><td>N/P</td><td>40</td><td>DNS</td><td>110</td><td>4</td></tr>
+                            <tr><td>ATV EXPERTO</td><td>82</td><td>CRISTOBAL PEREDO</td><td>16</td><td>26</td><td>N/P</td><td>20</td><td>DNF</td><td>34</td><td>96</td><td>5</td></tr>
+                            <tr><td>ATV EXPERTO</td><td>46</td><td>DANIEL CARDENAS</td><td>N/P</td><td>30</td><td>30</td><td>N/P</td><td>30</td><td>N/P</td><td>94</td><td>6</td></tr>
+                            <tr><td>ATV EXPERTO</td><td>119</td><td>DINKO VELICH</td><td>18</td><td>20</td><td>N/P</td><td>DNS</td><td>20</td><td>30</td><td>88</td><td>7</td></tr>
+                            <tr><td>ATV EXPERTO</td><td>191</td><td>PABLO ALVAREZ</td><td>N/P</td><td>N/P</td><td>40</td><td>N/P</td><td>N/P</td><td>N/P</td><td>40</td><td>9</td></tr>
+                            <tr><td>ATV EXPERTO</td><td>84</td><td>EXEQUIEL CHILOT</td><td>N/P</td><td>N/P</td><td>0</td><td>22</td><td>18</td><td>N/P</td><td>40</td><td>8</td></tr>
+                            <tr><td>ATV EXPERTO</td><td>9</td><td>RODRIGO COTO</td><td>14</td><td>N/P</td><td>N/P</td><td>DNS</td><td>22</td><td>N/P</td><td>36</td><td>10</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-atv-master-a" class="results-view"><div class="container"><div class="center-title"><h2 class="section-title">Resultados: ATV Master A</h2></div><p class="placeholder-text">Aún no hay datos de resultados disponibles para esta categoría.</p></div></div>
+        <div id="view-atv-open" class="results-view"><div class="container"><div class="center-title"><h2 class="section-title">Resultados: ATV Open</h2></div><p class="placeholder-text">Aún no hay datos de resultados disponibles para esta categoría.</p></div></div>
+        <div id="view-atv-master-b" class="results-view"><div class="container"><div class="center-title"><h2 class="section-title">Resultados: ATV Master B</h2></div><p class="placeholder-text">Aún no hay datos de resultados disponibles para esta categoría.</p></div></div>
+        <div id="view-atv-master-c" class="results-view"><div class="container"><div class="center-title"><h2 class="section-title">Resultados: ATV Master C</h2></div><p class="placeholder-text">Aún no hay datos de resultados disponibles para esta categoría.</p></div></div>
+        <div id="view-atv-promocional" class="results-view"><div class="container"><div class="center-title"><h2 class="section-title">Resultados: ATV Promocional</h2></div><p class="placeholder-text">Aún no hay datos de resultados disponibles para esta categoría.</p></div></div>
+        <div id="view-moto-experto" class="results-view"><div class="container"><div class="center-title"><h2 class="section-title">Resultados: Moto Experto</h2></div><p class="placeholder-text">Aún no hay datos de resultados disponibles para esta categoría.</p></div></div>
+        <div id="view-moto-master-a" class="results-view"><div class="container"><div class="center-title"><h2 class="section-title">Resultados: Moto Master A</h2></div><p class="placeholder-text">Aún no hay datos de resultados disponibles para esta categoría.</p></div></div>
+        <div id="view-motos-open" class="results-view"><div class="container"><div class="center-title"><h2 class="section-title">Resultados: Motos Open</h2></div><p class="placeholder-text">Aún no hay datos de resultados disponibles para esta categoría.</p></div></div>
+        <div id="view-moto-master-b" class="results-view"><div class="container"><div class="center-title"><h2 class="section-title">Resultados: Moto Master B</h2></div><p class="placeholder-text">Aún no hay datos de resultados disponibles para esta categoría.</p></div></div>
+        <div id="view-moto-master-c" class="results-view"><div class="container"><div class="center-title"><h2 class="section-title">Resultados: Moto Master C</h2></div><p class="placeholder-text">Aún no hay datos de resultados disponibles para esta categoría.</p></div></div>
+        <div id="view-moto-promocional" class="results-view"><div class="container"><div class="center-title"><h2 class="section-title">Resultados: Moto Promocional</h2></div><p class="placeholder-text">Aún no hay datos de resultados disponibles para esta categoría.</p></div></div>
+        <div id="view-4x4" class="results-view"><div class="container"><div class="center-title"><h2 class="section-title">Resultados: 4x4</h2></div><p class="placeholder-text">Aún no hay datos de resultados disponibles para esta categoría.</p></div></div>
+
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="sponsors-grid">
+                <img src="auspicios/auspicio_1.jpeg" alt="Logo Patagonia Moto Club" class="sponsor-logo">
+                <img src="auspicios/auspicio_2.jpeg" alt="Logo Construcciones 182" class="sponsor-logo">
+                <img src="auspicios/auspicio_3.jpeg" alt="Logo Transpetrol Aviation" class="sponsor-logo">
+                <img src="auspicios/auspicio_4.jpeg" alt="Logo Dracox Torneria" class="sponsor-logo">
+                <img src="auspicios/auspicio_5.jpeg" alt="Logo Studio 26" class="sponsor-logo">
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const allViews = document.querySelectorAll('#page-inicio, .results-view');
+
+            function showView(targetId) {
+                allViews.forEach(view => {
+                    view.style.display = 'none';
+                });
+
+                const targetView = document.getElementById(targetId);
+                if (targetView) {
+                    targetView.style.display = 'block';
+                }
+
+                window.scrollTo(0, 0);
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('data-target');
+                    showView(targetId);
+                });
+            });
+
+            showView('page-inicio');
+
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const mobileNavLinks = document.getElementById('nav-links');
+            hamburgerBtn.addEventListener('click', function() {
+                mobileNavLinks.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
