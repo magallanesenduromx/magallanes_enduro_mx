@@ -170,26 +170,31 @@
         .sponsor-logo { max-height: 70px; max-width: 200px; transition: transform 0.3s ease; }
         .sponsor-logo:hover { transform: scale(1.05); }
 
-        @media (max-width: 768px) {
-            .main-header { padding: 10px 20px; }
-            .hero-section { height: auto; flex-direction: column; }
-            .hero-gallery { display: grid;
-                            grid-template-columns: repeat(2, 1fr);
-                            gap: 5px; }
-            .gallery-item:nth-child(5) {display: none;}
-            .hero-section .hero-text { position: relative; transform: none; top: auto; left: auto; padding: 40px 20px; background-color: rgba(0, 0, 0, 0.7); }
-            .hero-section .hero-text h1 { font-size: 2.5rem; }
-            .hero-section .hero-text p { font-size: 1.2rem; }
-            .main-nav .nav-links { display: none; flex-direction: column; width: 100%; position: absolute; top: 70px; left: 0; background-color: var(--color-dark-bg); text-align: center; }
-            .main-nav .nav-links.active { display: flex; }
-            .main-nav .dropdown:hover .dropdown-content { display: none; }
-            .hamburger-btn { display: block; }
-            .dates-grid { grid-template-columns: 1fr; gap: 30px; }
-            .ranking-top3 { flex-direction: column; align-items: center; }
-            .ranking-top3 .p1 { order: 1; }
-            .ranking-top3 .p2 { order: 2; }
-            .ranking-top3 .p3 { order: 3; }
+    @media (max-width: 768px) {
+        .main-header { padding: 10px 20px; }
+        /* Las reglas para .hero-section y .hero-section .hero-text se eliminaron */
+        
+        .hero-gallery { 
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 5px; 
         }
+        .gallery-item:nth-child(5) {
+            display: none;
+        }
+
+        .hero-section .hero-text h1 { font-size: 2.5rem; }
+        .hero-section .hero-text p { font-size: 1.2rem; }
+        .main-nav .nav-links { display: none; flex-direction: column; width: 100%; position: absolute; top: 70px; left: 0; background-color: var(--color-dark-bg); text-align: center; }
+        .main-nav .nav-links.active { display: flex; }
+        .main-nav .dropdown:hover .dropdown-content { display: none; }
+        .hamburger-btn { display: block; }
+        .dates-grid { grid-template-columns: 1fr; gap: 30px; }
+        .ranking-top3 { flex-direction: column; align-items: center; }
+        .ranking-top3 .p1 { order: 1; }
+        .ranking-top3 .p2 { order: 2; }
+        .ranking-top3 .p3 { order: 3; }
+    }
 
     </style>
 </head>
