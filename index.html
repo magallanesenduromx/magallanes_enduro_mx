@@ -173,7 +173,10 @@
         @media (max-width: 768px) {
             .main-header { padding: 10px 20px; }
             .hero-section { height: auto; flex-direction: column; }
-            .hero-gallery { flex-direction: column; }
+            .hero-gallery { display: grid;
+                            grid-template-columns: repeat(2, 1fr);
+                            gap: 5px; }
+            .gallery-item:nth-child(5) {display: none;}
             .hero-section .hero-text { position: relative; transform: none; top: auto; left: auto; padding: 40px 20px; background-color: rgba(0, 0, 0, 0.7); }
             .hero-section .hero-text h1 { font-size: 2.5rem; }
             .hero-section .hero-text p { font-size: 1.2rem; }
