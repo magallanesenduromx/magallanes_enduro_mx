@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campeonato Enduro/Motocross - Patagonia</title>
+    <title>Campeonato Extremo Sur - Magallanes</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Roboto:wght@400;700&display=swap');
 
@@ -139,16 +139,16 @@
         .promo-image { width: 100%; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .promo-image:hover { transform: translateY(-10px); box-shadow: 0 12px 30px rgba(0,0,0,0.2); }
 
-        #page-inicio .news-section { padding: 60px 20px; background-color: var(--color-light-gray); }
+        .clubs-section { padding: 60px 20px; background-color: var(--color-light-gray); }
         .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 40px; border-bottom: 3px solid var(--color-principal); display: inline-block; padding-bottom: 10px; }
         .center-title { display: flex; justify-content: center; }
-        .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .news-card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease; }
-        .news-card:hover { transform: translateY(-10px); }
-        .news-card img { width: 100%; height: 200px; object-fit: cover; }
-        .news-card-content { padding: 20px; }
-        .news-card h3 { margin-top: 0; color: var(--color-principal); }
-
+        .clubs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .club-card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; padding: 20px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .club-card:hover { transform: translateY(-10px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+        .club-card h3 { margin-top: 0; color: var(--color-principal); font-size: 1.4rem; }
+        .club-card img { max-width: 100%; height: 120px; object-fit: contain; margin-top: 15px; }
+        .club-card p { font-size: 0.9rem; }
+        
         #page-inicio .video-section { padding: 60px 20px; background-color: white; }
         .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 1000px; margin: 0 auto; border: 5px solid var(--color-dark-bg); border-radius: 8px; }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
@@ -193,9 +193,9 @@
         }
 
         .main-footer { background-color: var(--color-dark-bg); padding: 40px 20px; }
-        .sponsors-grid { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 40px; }
-        .sponsor-logo { max-height: 70px; max-width: 200px; transition: transform 0.3s ease; }
-        .sponsor-logo:hover { transform: scale(1.05); }
+        .footer-clubs-grid { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 40px; }
+        .club-logo-footer { max-height: 70px; max-width: 200px; transition: transform 0.3s ease; filter: grayscale(100%) brightness(1.5); }
+        .club-logo-footer:hover { transform: scale(1.05); filter: grayscale(0%); }
 
         .page-overlay {
             display: none;
@@ -261,12 +261,11 @@
             .ranking-top3 .p2 { order: 2; }
             .ranking-top3 .p3 { order: 3; }
         }
-
     </style>
 </head>
 <body>
     <header class="main-header">
-        <a href="#" class="nav-link" data-target="page-inicio"><img src="auspicios/auspicio_1.jpeg" alt="Logo Patagonia Moto Club" class="logo"></a>
+        <a href="#" class="nav-link" data-target="page-inicio"><img src="promocionales/logo_campeonato_enduro.png" alt="Logo Campeonato Extremo Sur" class="logo"></a>
         <nav class="main-nav">
             <button class="hamburger-btn" id="hamburger-btn">☰</button>
             <ul class="nav-links" id="nav-links">
@@ -290,7 +289,7 @@
                     <div class="gallery-item"><img src="wallpapers/wallpaper_5.png" alt="Imagen de Enduro 5"></div>
                 </div>
                 <div class="hero-text">
-                    <h1>Campeonato de Enduro y Motocross de Magallanes, Chile</h1>
+                    <h1>CAMPEONATO EXTREMO SUR - MAGALLANES</h1>
                     <p>El campeonato más desafiante de la Patagonia</p>
                 </div>
             </section>
@@ -303,30 +302,29 @@
                     </div>
                 </div>
             </section>
-            <section class="news-section">
+            <section class="clubs-section">
                 <div class="container">
-                    <div class="center-title"><h2 class="section-title">Últimas Noticias</h2></div>
-                    <div class="news-grid">
-                        <div class="news-card">
-                            <img src="pilotos/piloto_3.jpeg" alt="Piloto en carrera">
-                            <div class="news-card-content">
-                                <h3>Fecha 3: Un Desafío en el barro</h3>
-                                <p>Revive los mejores momentos de la última carrera, donde los pilotos demostraron su destreza en condiciones extremas.</p>
-                            </div>
+                    <div class="center-title"><h2 class="section-title">Clubes Participantes</h2></div>
+                    <div class="clubs-grid">
+                        <div class="club-card">
+                            <h3>ENDUCROSS MOTO CLUB</h3>
+                            <p>Descripción ficticia del club. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <img src="auspicios/logo_enducross_moto_club.jpeg" alt="Logo ENDUCROSS MOTO CLUB">
                         </div>
-                        <div class="news-card">
-                            <img src="pilotos/piloto_1.jpeg" alt="Piloto preparándose">
-                            <div class="news-card-content">
-                                <h3>Abiertas las inscripciones para la próxima temporada</h3>
-                                <p>No te quedes fuera. Asegura tu lugar en la parrilla de salida y prepárate para competir al más alto nivel.</p>
-                            </div>
+                        <div class="club-card">
+                            <h3>HIELO SUR MOTO CLUB</h3>
+                            <p>Descripción ficticia del club. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <img src="auspicios/logo_hielo_sur_moto_club.jpeg" alt="Logo HIELO SUR MOTO CLUB">
                         </div>
-                        <div class="news-card">
-                            <img src="pilotos/piloto_2.jpeg" alt="Piloto saltando">
-                            <div class="news-card-content">
-                                <h3>Nuevos patrocinadores se unen al campeonato</h3>
-                                <p>Gracias al apoyo de nuevas marcas, el campeonato crece y ofrecerá mejores premios y organización.</p>
-                            </div>
+                        <div class="club-card">
+                            <h3>PATAGONIA MOTO CLUB</h3>
+                            <p>Descripción ficticia del club. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <img src="auspicios/logo_patagonia_moto_club.jpeg" alt="Logo PATAGONIA MOTO CLUB">
+                        </div>
+                        <div class="club-card">
+                             <h3>CLUB DE MOTOCICLISMO PUERTO NATALES</h3>
+                             <p>Descripción ficticia del club. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                             <img src="auspicios/logo_club_motociclismo_puertonatales.jpeg" alt="Logo CLUB DE MOTOCICLISMO PUERTO NATALES">
                         </div>
                     </div>
                 </div>
@@ -422,12 +420,11 @@
 
     <footer class="main-footer">
         <div class="container">
-            <div class="sponsors-grid">
-                <img src="auspicios/auspicio_1.jpeg" alt="Logo Patagonia Moto Club" class="sponsor-logo">
-                <img src="auspicios/auspicio_2.jpeg" alt="Logo Construcciones 182" class="sponsor-logo">
-                <img src="auspicios/auspicio_3.jpeg" alt="Logo Transpetrol Aviation" class="sponsor-logo">
-                <img src="auspicios/auspicio_4.jpeg" alt="Logo Dracox Torneria" class="sponsor-logo">
-                <img src="auspicios/auspicio_5.jpeg" alt="Logo Studio 26" class="sponsor-logo">
+            <div class="footer-clubs-grid">
+                <img src="auspicios/logo_enducross_moto_club.jpeg" alt="Logo ENDUCROSS MOTO CLUB" class="club-logo-footer">
+                <img src="auspicios/logo_hielo_sur_moto_club.jpeg" alt="Logo HIELO SUR MOTO CLUB" class="club-logo-footer">
+                <img src="auspicios/logo_patagonia_moto_club.jpeg" alt="Logo PATAGONIA MOTO CLUB" class="club-logo-footer">
+                <img src="auspicios/logo_club_motociclismo_puertonatales.jpeg" alt="Logo CLUB DE MOTOCICLISMO PUERTO NATALES" class="club-logo-footer">
             </div>
         </div>
     </footer>
@@ -440,6 +437,20 @@
             const mobileNav = document.getElementById('nav-links');
             const pageOverlay = document.getElementById('page-overlay');
 
+            // --- OPTIMIZACIÓN: Función centralizada para manejar el menú móvil ---
+            function toggleMobileMenu(forceClose = false) {
+                const isActive = mobileNav.classList.contains('active');
+                if (forceClose || isActive) {
+                    mobileNav.classList.remove('active');
+                    pageOverlay.classList.remove('active');
+                    hamburgerBtn.innerHTML = '☰';
+                } else {
+                    mobileNav.classList.add('active');
+                    pageOverlay.classList.add('active');
+                    hamburgerBtn.innerHTML = '✕';
+                }
+            }
+            
             function showView(targetId) {
                 allViews.forEach(view => {
                     view.style.display = 'none';
@@ -450,11 +461,7 @@
                     targetView.style.display = 'block';
                 }
                 
-                // Cierra el menú móvil después de hacer clic
-                mobileNav.classList.remove('active');
-                pageOverlay.classList.remove('active');
-                hamburgerBtn.innerHTML = '☰';
-
+                toggleMobileMenu(true); // Cierra el menú móvil al cambiar de vista
                 window.scrollTo(0, 0);
             }
 
@@ -468,19 +475,9 @@
                 });
             });
 
-            hamburgerBtn.addEventListener('click', function() {
-                const isActive = mobileNav.classList.toggle('active');
-                pageOverlay.classList.toggle('active', isActive);
-                this.innerHTML = isActive ? '✕' : '☰';
-            });
-            
-            pageOverlay.addEventListener('click', function() {
-                mobileNav.classList.remove('active');
-                this.classList.remove('active');
-                hamburgerBtn.innerHTML = '☰';
-            });
+            hamburgerBtn.addEventListener('click', () => toggleMobileMenu());
+            pageOverlay.addEventListener('click', () => toggleMobileMenu(true));
 
-            // Mostrar la página de inicio por defecto
             showView('page-inicio');
         });
     </script>
