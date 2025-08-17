@@ -194,8 +194,15 @@
 
         .main-footer { background-color: var(--color-dark-bg); padding: 40px 20px; }
         .footer-clubs-grid { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 40px; }
-        .club-logo-footer { max-height: 70px; max-width: 200px; transition: transform 0.3s ease; filter: grayscale(100%) brightness(1.5); }
-        .club-logo-footer:hover { transform: scale(1.05); filter: grayscale(0%); }
+        .club-logo-footer { max-height: 70px; max-width: 200px; transition: transform 0.3s ease; }
+        .club-logo-footer:hover { transform: scale(1.05); }
+
+        .footer-title {
+            color: white;
+            text-align: center;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
 
         .page-overlay {
             display: none;
@@ -420,12 +427,21 @@
 
     <footer class="main-footer">
         <div class="container">
-            <div class="footer-clubs-grid">
-                <img src="auspicios/logo_enducross_moto_club.jpeg" alt="Logo ENDUCROSS MOTO CLUB" class="club-logo-footer">
-                <img src="auspicios/logo_hielo_sur_moto_club.jpeg" alt="Logo HIELO SUR MOTO CLUB" class="club-logo-footer">
-                <img src="auspicios/logo_patagonia_moto_club.jpeg" alt="Logo PATAGONIA MOTO CLUB" class="club-logo-footer">
-                <img src="auspicios/logo_club_motociclismo_puertonatales.jpeg" alt="Logo CLUB DE MOTOCICLISMO PUERTO NATALES" class="club-logo-footer">
-            </div>
+            <h4 class="footer-title">Con la participación de:</h4>
+                <div class="footer-clubs-grid">
+                    <a href="https://www.instagram.com/enducross_motoclub/" target="_blank">
+                        <img src="auspicios/logo_enducross_moto_club.jpeg" alt="Logo ENDUCROSS MOTO CLUB" class="club-logo-footer">
+                    </a>
+                    <a href="https://www.instagram.com/hielosurmc/" target="_blank">
+                        <img src="auspicios/logo_hielo_sur_moto_club.jpeg" alt="Logo HIELO SUR MOTO CLUB" class="club-logo-footer">
+                    </a>
+                    <a href="https://www.instagram.com/patagoniamotoclub/" target="_blank">
+                        <img src="auspicios/logo_patagonia_moto_club.jpeg" alt="Logo PATAGONIA MOTO CLUB" class="club-logo-footer">
+                    </a>
+                    <a href="https://www.instagram.com" target="_blank">
+                        <img src="auspicios/logo_club_motociclismo_puertonatales.jpeg" alt="Logo CLUB DE MOTOCICLISMO PUERTO NATALES" class="club-logo-footer">
+                    </a>
+                </div>
         </div>
     </footer>
 
