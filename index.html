@@ -268,6 +268,85 @@
             .ranking-top3 .p2 { order: 2; }
             .ranking-top3 .p3 { order: 3; }
         }
+        /* --- ESTILOS PARA LA PÁGINA DE CAMPEONES --- */
+.champions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.discipline-title {
+    font-family: var(--font-titulos);
+    font-size: 2.2rem;
+    color: var(--color-texto);
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--color-light-gray);
+    padding-bottom: 15px;
+}
+#page-campeones .discipline-title:first-of-type {
+    margin-top: 20px;
+}
+
+.champion-card {
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    padding: 25px 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.champion-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+
+.champion-card .champion-photo {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #FFD700; /* Borde dorado de campeón */
+    margin-bottom: 15px;
+}
+
+.champion-card .champion-name {
+    font-family: var(--font-titulos);
+    font-size: 1.5rem;
+    margin: 0 0 5px 0;
+    color: var(--color-texto);
+}
+
+.champion-card .champion-category {
+    font-family: var(--font-cuerpo);
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--color-principal);
+}
+
+/* --- ESTILOS PARA TEXTOS INTRODUCTORIOS DE CAMPEONES --- */
+.section-intro-text {
+    font-family: var(--font-cuerpo);
+    text-align: center;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 20px auto 50px auto; /* Aumenta el margen inferior para separar del primer título de disciplina */
+    color: #555;
+}
+
+.discipline-intro-text {
+    font-family: var(--font-cuerpo);
+    text-align: center;
+    font-size: 1rem;
+    max-width: 700px;
+    margin: 15px auto 30px auto;
+    color: #666;
+}
+
     </style>
 </head>
 <body>
@@ -279,6 +358,7 @@
                 <li><a href="#" class="nav-link" data-target="page-inicio">Inicio</a></li>
                 <li><a href="#" class="nav-link" data-target="page-reglamento">Reglamento</a></li>
                 <li><a href="#" class="nav-link" data-target="page-resultados">Resultados</a></li>
+                <li><a href="#" class="nav-link" data-target="page-campeones">Campeones</a></li>
             </ul>
         </nav>
     </header>
@@ -376,6 +456,193 @@
                     <a href="#" class="nav-link category-link" data-target="view-moto-master-c">MOTO MASTER C</a>
                     <a href="#" class="nav-link category-link" data-target="view-moto-promocional">MOTO PROMOCIONAL</a>
                     <a href="#" class="nav-link category-link" data-target="view-4x4">4X4</a>
+                </div>
+            </div>
+        </div>
+                <div id="page-campeones" class="page-view">
+            <div class="container">
+                <div class="center-title"><h2 class="section-title">Campeones Vigentes 2024-2025</h2></div>
+                <p class="section-intro-text">
+    El Campeonato Extremo Sur pone a prueba la tenacidad y habilidad de los mejores pilotos de la Patagonia. A través de barro, viento y terrenos implacables, solo los más dedicados logran alcanzar la gloria. Extendemos nuestras más sinceras felicitaciones a los campeones de la temporada 2024-2025, quienes han demostrado una destreza y un espíritu inquebrantable.
+</p>
+
+                <h3 class="discipline-title">MOTOCROSS</h3>
+                <p class="discipline-intro-text">
+    Una disciplina de pura velocidad, saltos espectaculares y agilidad técnica en circuitos desafiantes. A continuación, presentamos a los pilotos que dominaron cada categoría con potencia y precisión.
+</p>
+                <div class="champions-grid">
+                    <div class="champion-card">
+                        <img src="campeones/sebastian_alvarez.jpeg" alt="Foto de Sebastian Alvarez" class="champion-photo">
+                        <h4 class="champion-name">Sebastian Alvarez</h4>
+                        <p class="champion-category">Experto</p>
+                    </div>
+                    <div class="champion-card">
+                        <img src="campeones/pablo_paredes.jpeg" alt="Foto de Pablo Paredes" class="champion-photo">
+                        <h4 class="champion-name">Pablo Paredes</h4>
+                        <p class="champion-category">Open</p>
+                    </div>
+                    <div class="champion-card">
+                        <img src="campeones/diego_alvarez.jpeg" alt="Foto de Diego Alvarez" class="champion-photo">
+                        <h4 class="champion-name">Diego Alvarez</h4>
+                        <p class="champion-category">Master A</p>
+                    </div>
+                     <div class="champion-card">
+                        <img src="campeones/pablo_paredes.jpeg" alt="Foto de Pablo Paredes" class="champion-photo">
+                        <h4 class="champion-name">Pablo Paredes</h4>
+                        <p class="champion-category">Master C</p>
+                    </div>
+                    <div class="champion-card">
+                        <img src="campeones/branko_lefoll.jpeg" alt="Foto de Branko Lefoll" class="champion-photo">
+                        <h4 class="champion-name">Branko Lefoll</h4>
+                        <p class="champion-category">Promocional</p>
+                    </div>
+                    <div class="champion-card">
+                        <img src="campeones/bastian_vargas.jpeg" alt="Foto de Bastian Vargas" class="champion-photo">
+                        <h4 class="champion-name">Bastian Vargas</h4>
+                        <p class="champion-category">ATV Experto</p>
+                    </div>
+                    <div class="champion-card">
+                        <img src="campeones/vicente_krautz_1.jpeg" alt="Foto de Vicente Krautz" class="champion-photo">
+                        <h4 class="champion-name">Vicente Krautz</h4>
+                        <p class="champion-category">ATV Open</p>
+                    </div>
+                    <div class="champion-card">
+                        <img src="campeones/francisco_ampuero.jpeg" alt="Foto de Francisco Ampuero" class="champion-photo">
+                        <h4 class="champion-name">Francisco Ampuero</h4>
+                        <p class="champion-category">ATV Promocional</p>
+                    </div>
+                    <div class="champion-card">
+                        <img src="campeones/ciro_diaz.jpeg" alt="Foto de Ciro Diaz" class="champion-photo">
+                        <h4 class="champion-name">Ciro Diaz</h4>
+                        <p class="champion-category">50 Mini</p>
+                    </div>
+                    <div class="champion-card">
+                        <img src="campeones/santiago_toro.jpeg" alt="Foto de Santiago Toro" class="champion-photo">
+                        <h4 class="champion-name">Santiago Toro</h4>
+                        <p class="champion-category">50CC</p>
+                    </div>
+                    <div class="champion-card">
+                        <img src="campeones/jeremias_aguilar.jpeg" alt="Foto de Jeremias Aguilar" class="champion-photo">
+                        <h4 class="champion-name">Jeremias Aguilar</h4>
+                        <p class="champion-category">65CC</p>
+                    </div>
+                     <div class="champion-card">
+                        <img src="campeones/pablo_paredes.jpeg" alt="Foto de Pablo Paredes" class="champion-photo">
+                        <h4 class="champion-name">Pablo Paredes</h4>
+                        <p class="champion-category">85CC</p>
+                    </div>
+                    <div class="champion-card">
+                        <img src="campeones/ludmila_roman.jpeg" alt="Foto de Ludmila Roman" class="champion-photo">
+                        <h4 class="champion-name">Ludmila Roman</h4>
+                        <p class="champion-category">ATV 125B</p>
+                    </div>
+                    <div class="champion-card">
+                        <img src="campeones/diego_diaz.jpeg" alt="Foto de Diego Diaz" class="champion-photo">
+                        <h4 class="champion-name">Diego Diaz</h4>
+                        <p class="champion-category">ATV 125 Pro</p>
+                    </div>
+                </div>
+
+                <h3 class="discipline-title">ENDURO</h3>
+                <p class="discipline-intro-text">
+    La prueba definitiva de resistencia y estrategia, donde los pilotos se enfrentan a largos y variados recorridos a través de la naturaleza patagónica. A continuación, los campeones que demostraron una increíble capacidad de adaptación y perseverancia.
+</p>
+                 <div class="champions-grid">
+                    <div class="champion-card">
+                        <img src="campeones/gaston_leonardelli.jpeg" alt="Foto de Gaston Leonardelli" class="champion-photo">
+                        <h4 class="champion-name">Gaston Leonardelli</h4>
+                        <p class="champion-category">Experto</p>
+                    </div>
+                    <div class="champion-card">
+                        <img src="campeones/carlos_alarcon.jpeg" alt="Foto de Carlos Alarcon" class="champion-photo">
+                        <h4 class="champion-name">Carlos Alarcon</h4>
+                        <p class="champion-category">Open</p>
+                    </div>
+                    <div class="champion-card">
+                        <img src="campeones/rodrigo_gonzalez.jpeg" alt="Foto de Rodrigo Gonzalez" class="champion-photo">
+                        <h4 class="champion-name">Rodrigo Gonzalez</h4>
+                        <p class="champion-category">Master A</p>
+                    </div>
+                    <div class="champion-card">
+                        <img src="campeones/humberto_pacheco.jpeg" alt="Foto de Humberto Pacheco" class="champion-photo">
+                        <h4 class="champion-name">Humberto Pacheco</h4>
+                        <p class="champion-category">Master B</p>
+                    </div>
+                    <div class="champion-card">
+                        <img src="campeones/pablo_paredes.jpeg" alt="Foto de Pablo Paredes" class="champion-photo">
+                        <h4 class="champion-name">Pablo Paredes</h4>
+                        <p class="champion-category">Master C</p>
+                    </div>
+                    <div class="champion-card">
+                        <img src="campeones/pablo_paredes.jpeg" alt="Foto de Pablo Paredes" class="champion-photo">
+                        <h4 class="champion-name">Pablo Paredes</h4>
+                        <p class="champion-category">Promocional</p>
+                    </div>
+                    <div class="champion-card">
+                        <img src="campeones/gonzalo_marquez.jpeg" alt="Foto de Gonzalo Marquez" class="champion-photo">
+                        <h4 class="champion-name">Gonzalo Marquez</h4>
+                        <p class="champion-category">ATV Experto</p>
+                    </div>
+                     <div class="champion-card">
+                        <img src="campeones/pablo_vera.jpeg" alt="Foto de Pablo Vera" class="champion-photo">
+                        <h4 class="champion-name">Pablo Vera</h4>
+                        <p class="champion-category">ATV Master A</p>
+                    </div>
+                     <div class="champion-card">
+                        <img src="campeones/walter_brauning.jpeg" alt="Foto de Walter Brauning" class="champion-photo">
+                        <h4 class="champion-name">Walter Brauning</h4>
+                        <p class="champion-category">ATV Master B</p>
+                    </div>
+                    <div class="champion-card">
+                        <img src="campeones/carlos_mendoza.jpeg" alt="Foto de Carlos Mendoza" class="champion-photo">
+                        <h4 class="champion-name">Carlos Mendoza</h4>
+                        <p class="champion-category">ATV Master C</p>
+                    </div>
+                    <div class="champion-card">
+                        <img src="campeones/eduardo_alarcon.jpeg" alt="Foto de Eduardo Alarcon" class="champion-photo">
+                        <h4 class="champion-name">Eduardo Alarcon</h4>
+                        <p class="champion-category">ATV Open</p>
+                    </div>
+                    <div class="champion-card">
+                        <img src="campeones/lukas_buljan.jpeg" alt="Foto de Lukas Buljan" class="champion-photo">
+                        <h4 class="champion-name">Lukas Buljan</h4>
+                        <p class="champion-category">ATV Promocional</p>
+                    </div>
+                    <div class="champion-card">
+                        <img src="campeones/milan_beros.jpeg" alt="Foto de Milan Beros" class="champion-photo">
+                        <h4 class="champion-name">Milan Beros</h4>
+                        <p class="champion-category">50 Mini</p>
+                    </div>
+                    <div class="champion-card">
+                        <img src="campeones/jose_tomas_miranda.jpeg" alt="Foto de Jose Tomas Miranda" class="champion-photo">
+                        <h4 class="champion-name">Jose Tomas Miranda</h4>
+                        <p class="champion-category">65CC</p>
+                    </div>
+                    <div class="champion-card">
+                        <img src="campeones/pablo_paredes.jpeg" alt="Foto de Pablo Paredes" class="champion-photo">
+                        <h4 class="champion-name">Pablo Paredes</h4>
+                        <p class="champion-category">85CC</p>
+                    </div>
+                    <div class="champion-card">
+                        <img src="campeones/esteban_paredes.jpeg" alt="Foto de Esteban Paredes" class="champion-photo">
+                        <h4 class="champion-name">Esteban Paredes</h4>
+                        <p class="champion-category">ATV 125B</p>
+                    </div>
+                    <div class="champion-card">
+                        <img src="campeones/isidora_solis.jpeg" alt="Foto de Isidora Solis" class="champion-photo">
+                        <h4 class="champion-name">Isidora Solis</h4>
+                        <p class="champion-category">ATV 125 Pro</p>
+                    </div>
+                     <div class="champion-card">
+                        <img src="campeones/vicente_vidal.jpeg" alt="Foto de Vicente Vidal" class="champion-photo">
+                        <h4 class="champion-name">Vicente Vidal</h4>
+                        <p class="champion-category">ATV 125A</p>
+                    </div>
+                    <div class="champion-card">
+                        <img src="campeones/florencia_vidal.jpeg" alt="Foto de Florencia Vidal" class="champion-photo">
+                        <h4 class="champion-name">Florencia Vidal</h4>
+                        <p class="champion-category">ATV 50</p>
+                    </div>
                 </div>
             </div>
         </div>
