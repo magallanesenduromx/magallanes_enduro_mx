@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Campeonato Extremo Sur - Magallanes</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Roboto:wght@400;700&display=swap');
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- VARIABLES GLOBALES Y RESET BÁSICO --- */
         :root {
             --color-principal: #FF4500;
             --color-fondo: #FFFFFF;
@@ -37,22 +43,33 @@
             padding: 20px;
         }
 
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            border-bottom: 3px solid var(--color-principal);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .center-title {
+            display: flex;
+            justify-content: center;
+        }
+
+        /* --- VISTAS DE PÁGINA (SPA) --- */
         .page-view {
             display: none;
             padding: 60px 20px;
             background-color: var(--color-light-gray);
         }
+
         #page-inicio {
-             background-color: transparent;
-             padding: 0;
+            background-color: transparent;
+            padding: 0;
         }
 
-        .placeholder-text {
-            text-align: center;
-            font-size: 1.2rem;
-            color: #666;
-        }
-
+        /* --- HEADER Y NAVEGACIÓN --- */
         .main-header {
             background-color: rgba(26, 26, 26, 0.9);
             padding: 10px 40px;
@@ -62,19 +79,60 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .logo { max-width: 160px; z-index: 1001; }
-        .main-nav ul { margin: 0; padding: 0; list-style: none; display: flex; align-items: center; }
-        .main-nav a { color: white; text-decoration: none; padding: 15px 20px; display: block; font-family: var(--font-titulos); font-weight: 500; transition: background-color 0.3s, color 0.3s; border-radius: 4px; }
-        .main-nav a:hover { background-color: var(--color-principal); color: white; }
-        .hamburger-btn { display: none; cursor: pointer; font-size: 2rem; color: white; background: none; border: none; z-index: 1002; }
-        
-        #page-inicio .hero-section {
-            padding: 0;
-            background: #1a1a1a;
+        .logo {
+            max-width: 160px;
+            z-index: 1001;
         }
+
+        .main-nav ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .main-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            display: block;
+            font-family: var(--font-titulos);
+            font-weight: 500;
+            transition: background-color 0.3s, color 0.3s;
+            border-radius: 4px;
+        }
+
+        .main-nav a:hover {
+            background-color: var(--color-principal);
+            color: white;
+        }
+
+        .hamburger-btn {
+            display: none;
+            cursor: pointer;
+            font-size: 2rem;
+            color: white;
+            background: none;
+            border: none;
+            z-index: 1002;
+        }
+        
+        .page-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+        }
+
+        /* --- SECCIÓN HERO (INICIO) --- */
         .hero-section {
             position: relative;
             height: 85vh;
@@ -84,25 +142,30 @@
             align-items: center;
             justify-content: center;
         }
+
         .hero-gallery {
             display: flex;
             width: 100%;
             height: 100%;
         }
+
         .gallery-item {
             flex: 1;
             height: 100%;
             overflow: hidden;
         }
+
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.4s ease;
         }
+
         .gallery-item:hover img {
             transform: scale(1.05);
         }
+
         .hero-section::before {
             content: '';
             position: absolute;
@@ -113,6 +176,7 @@
             background-color: rgba(0, 0, 0, 0.5);
             z-index: 2;
         }
+
         .hero-section .hero-text {
             position: absolute;
             top: 50%;
@@ -122,52 +186,339 @@
             text-align: center;
             width: 90%;
         }
-        .hero-section .hero-text h1 { 
-            font-size: 4rem; 
-            margin-bottom: 10px; 
+
+        .hero-section .hero-text h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
             letter-spacing: 2px;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
         }
-        .hero-section .hero-text p { 
-            font-size: 1.5rem; 
+
+        .hero-section .hero-text p {
+            font-size: 1.5rem;
             font-family: var(--font-cuerpo);
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
         }
 
-        #page-inicio .dates-section { padding: 60px 20px; background-color: var(--color-fondo); }
-        .dates-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; justify-content: center; align-items: start; }
-        .promo-image { width: 100%; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); transition: transform 0.3s ease, box-shadow 0.3s ease; }
-        .promo-image:hover { transform: translateY(-10px); box-shadow: 0 12px 30px rgba(0,0,0,0.2); }
+        /* --- SECCIÓN FECHAS (INICIO) --- */
+        .dates-section {
+            padding: 60px 20px;
+            background-color: var(--color-fondo);
+        }
 
-        .clubs-section { padding: 60px 20px; background-color: var(--color-light-gray); }
-        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 40px; border-bottom: 3px solid var(--color-principal); display: inline-block; padding-bottom: 10px; }
-        .center-title { display: flex; justify-content: center; }
-        .clubs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
-        .club-card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; padding: 20px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
-        .club-card:hover { transform: translateY(-10px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
-        .club-card h3 { margin-top: 0; color: var(--color-principal); font-size: 1.4rem; }
-        .club-card img { max-width: 100%; height: 120px; object-fit: contain; margin-top: 15px; }
-        .club-card p { font-size: 0.9rem; }
+        .dates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            justify-content: center;
+            align-items: start;
+        }
+
+        .promo-image {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .promo-image:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* --- SECCIÓN INFORMACIÓN IMPORTANTE (INICIO) --- */
+        .info-section {
+            padding: 60px 20px;
+            background-color: var(--color-fondo);
+        }
+
+        .countdown-banner {
+            background-color: var(--color-principal);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+            margin: 40px auto;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+        }
+
+        .countdown-banner h4 {
+            font-family: var(--font-titulos);
+            font-size: 1.8rem;
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            width: 100%;
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .countdown-item span {
+            font-family: var(--font-titulos);
+            font-size: 3.5rem;
+            color: white;
+            line-height: 1;
+        }
+
+        .countdown-item .label {
+            font-family: var(--font-cuerpo);
+            font-size: 1rem;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 5px;
+        }
+
+        .location-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 40px;
+            margin-top: 50px;
+            align-items: stretch;
+        }
+
+        .info-block {
+            background-color: var(--color-light-gray);
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 30px;
+        }
+
+        .info-block h4 {
+            font-size: 1.5rem;
+            color: var(--color-principal);
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        .info-block p {
+            font-family: var(--font-cuerpo);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #444;
+            margin-bottom: 15px;
+        }
+
+        .info-block a {
+            color: var(--color-principal);
+            text-decoration: underline;
+            font-weight: bold;
+            font-family: var(--font-cuerpo);
+            font-size: 1.1rem;
+        }
+
+        .info-block a:hover {
+            color: var(--color-texto);
+        }
+
+        .map-container {
+            padding: 30px;
+            background-color: var(--color-light-gray);
+            border-radius: 12px;
+            height: 100%;
+            box-sizing: border-box;
+        }
+
+        .map-responsive {
+            overflow: hidden;
+            position: relative;
+            height: 0;
+            padding-bottom: 75%;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .map-responsive iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* --- SECCIÓN CLUBES (INICIO) --- */
+        .clubs-section {
+            padding: 60px 20px;
+            background-color: var(--color-light-gray);
+        }
+
+        .clubs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .club-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .club-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .club-card h3 {
+            margin-top: 0;
+            color: var(--color-principal);
+            font-size: 1.4rem;
+        }
+
+        .club-card img {
+            max-width: 100%;
+            height: 120px;
+            object-fit: contain;
+            margin-top: 15px;
+        }
+
+        .club-card p {
+            font-size: 0.9rem;
+        }
+
+        .club-instagram-link {
+            display: block;
+            margin-top: 20px;
+            font-size: 2rem;
+            color: #333;
+            text-decoration: none;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .club-instagram-link:hover {
+            color: var(--color-principal);
+            transform: scale(1.1);
+        }
+
+        /* --- SECCIÓN VIDEO (INICIO) --- */
+        .video-section {
+            padding: 60px 20px;
+            background-color: white;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 1000px;
+            margin: 0 auto;
+            border: 5px solid var(--color-dark-bg);
+            border-radius: 8px;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
         
-        #page-inicio .video-section { padding: 60px 20px; background-color: white; }
-        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 1000px; margin: 0 auto; border: 5px solid var(--color-dark-bg); border-radius: 8px; }
-        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        /* --- PÁGINA DE CAMPEONES --- */
+        .champions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
 
-        .ranking-top3 { display: flex; justify-content: center; gap: 30px; margin-bottom: 50px; flex-wrap: wrap; }
-        .pilot-card { background-color: white; border-radius: 10px; text-align: center; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s; width: 250px; }
-        .pilot-card:hover { transform: scale(1.05); }
-        .pilot-card img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 5px solid; }
-        .pilot-card.p1 img { border-color: #FFD700; }
-        .pilot-card.p2 img { border-color: #C0C0C0; }
-        .pilot-card.p3 img { border-color: #CD7F32; }
-        .pilot-card h3 { margin: 15px 0 5px 0; font-size: 1.5rem; }
-        .pilot-card .place { font-size: 1.2rem; font-weight: bold; color: var(--color-principal); }
-        .results-table-wrapper { overflow-x: auto; }
-        .results-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        .results-table th, .results-table td { border: 1px solid #ddd; padding: 12px; text-align: center; }
-        .results-table th { background-color: var(--color-dark-bg); color: white; font-family: var(--font-titulos); }
-        .results-table tbody tr:nth-child(even) { background-color: #f9f9f9; }
-        .results-table tbody tr:hover { background-color: #f1f1f1; }
+        .discipline-title {
+            font-family: var(--font-titulos);
+            font-size: 2.2rem;
+            color: var(--color-texto);
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--color-light-gray);
+            padding-bottom: 15px;
+        }
+
+        #page-campeones .discipline-title:first-of-type {
+            margin-top: 20px;
+        }
+
+        .champion-card {
+            background-color: white;
+            border-radius: 10px;
+            text-align: center;
+            padding: 25px 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .champion-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .champion-card .champion-photo {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #FFD700;
+            margin-bottom: 15px;
+        }
+
+        .champion-card .champion-name {
+            font-family: var(--font-titulos);
+            font-size: 1.5rem;
+            margin: 0 0 5px 0;
+            color: var(--color-texto);
+        }
+
+        .champion-card .champion-category {
+            font-family: var(--font-cuerpo);
+            font-size: 1rem;
+            font-weight: bold;
+            color: var(--color-principal);
+        }
+        
+        .section-intro-text {
+            font-family: var(--font-cuerpo);
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 20px auto 50px auto;
+            color: #555;
+        }
+
+        .discipline-intro-text {
+            font-family: var(--font-cuerpo);
+            text-align: center;
+            font-size: 1rem;
+            max-width: 700px;
+            margin: 15px auto 30px auto;
+            color: #666;
+        }
+
+        /* --- PÁGINA DE RESULTADOS --- */
+        .placeholder-text {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+        }
 
         .results-category-grid {
             display: grid;
@@ -175,6 +526,7 @@
             gap: 20px;
             margin-top: 40px;
         }
+
         .category-link {
             display: block;
             background-color: var(--color-dark-bg);
@@ -187,38 +539,133 @@
             border-radius: 8px;
             transition: background-color 0.3s, transform 0.3s;
         }
+
         .category-link:hover {
             background-color: var(--color-principal);
             transform: translateY(-5px);
         }
 
-        .main-footer { background-color: var(--color-dark-bg); padding: 40px 20px; }
-        .footer-clubs-grid { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 40px; }
-        .club-logo-footer { max-height: 70px; max-width: 200px; transition: transform 0.3s ease; }
-        .club-logo-footer:hover { transform: scale(1.05); }
+        .ranking-top3 {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
 
-        .footer-title {
-            color: white;
+        .pilot-card {
+            background-color: white;
+            border-radius: 10px;
             text-align: center;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            width: 250px;
         }
 
-        .page-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
+        .pilot-card:hover {
+            transform: scale(1.05);
+        }
+
+        .pilot-card img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid;
+        }
+
+        .pilot-card.p1 img { border-color: #FFD700; }
+        .pilot-card.p2 img { border-color: #C0C0C0; }
+        .pilot-card.p3 img { border-color: #CD7F32; }
+        .pilot-card h3 { margin: 15px 0 5px 0; font-size: 1.5rem; }
+        .pilot-card .place { font-size: 1.2rem; font-weight: bold; color: var(--color-principal); }
+
+        .results-table-wrapper { overflow-x: auto; }
+
+        .results-table {
             width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            z-index: 998;
+            border-collapse: collapse;
+            margin-top: 20px;
         }
 
+        .results-table th,
+        .results-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .results-table th {
+            background-color: var(--color-dark-bg);
+            color: white;
+            font-family: var(--font-titulos);
+        }
+
+        .results-table tbody tr:nth-child(even) { background-color: #f9f9f9; }
+        .results-table tbody tr:hover { background-color: #f1f1f1; }
+
+        /* --- FOOTER --- */
+        .main-footer {
+            background-color: var(--color-dark-bg);
+            color: #f4f4f4;
+            padding: 50px 20px;
+            font-family: var(--font-cuerpo);
+            font-size: 0.95rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .footer-item {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .footer-item h4 {
+            color: var(--color-principal);
+            font-size: 1.2rem;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-family: var(--font-titulos);
+            border-bottom: 1px solid #444;
+            padding-bottom: 10px;
+        }
+
+        .footer-item p {
+            margin-bottom: 8px;
+            line-height: 1.6;
+            color: #ccc;
+        }
+
+        .footer-item a {
+            color: #f4f4f4;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-item a:hover {
+            text-decoration: underline;
+            color: var(--color-principal);
+        }
+
+        /* --- MEDIA QUERIES PARA RESPONSIVE DESIGN --- */
         @media (max-width: 768px) {
-            .main-header { padding: 10px 20px; }
-            .hamburger-btn { display: block; }
-            
+            .main-header {
+                padding: 10px 20px;
+            }
+
+            .hamburger-btn {
+                display: block;
+            }
+
             .nav-links {
                 position: fixed;
                 top: 0;
@@ -232,123 +679,61 @@
                 transition: right 0.4s ease-in-out;
                 z-index: 999;
             }
+
             .nav-links.active {
                 right: 0;
             }
+
             .page-overlay.active {
                 display: block;
             }
 
-            .hero-section {
-                position: relative;
-            }
-            .hero-gallery { 
+            .hero-gallery {
                 display: grid;
                 grid-template-columns: repeat(2, 1fr);
-                gap: 5px; 
+                gap: 5px;
             }
+
             .gallery-item:nth-child(5) {
                 display: none;
             }
-            .hero-section .hero-text {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                width: 90%;
-                background-color: transparent;
-                padding: 0;
-            }
+            
             .hero-section .hero-text h1 { font-size: 2.5rem; }
             .hero-section .hero-text p { font-size: 1.2rem; }
-            
-            .dates-grid { grid-template-columns: 1fr; gap: 30px; }
+            .dates-grid { grid-template-columns: 1fr; }
             .ranking-top3 { flex-direction: column; align-items: center; }
             .ranking-top3 .p1 { order: 1; }
             .ranking-top3 .p2 { order: 2; }
             .ranking-top3 .p3 { order: 3; }
+
+            .location-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .countdown-banner h4 { font-size: 1.5rem; }
+            .countdown-banner .countdown-item span { font-size: 2.5rem; }
+            .countdown-banner .countdown-item .label { font-size: 0.8rem; }
+            .info-block h4 { font-size: 1.3rem; }
+            .info-block p { font-size: 1rem; }
+
+            .footer-content {
+                text-align: center;
+                flex-direction: column;
+            }
+            
+            .footer-item {
+               border-bottom: 1px solid #444;
+               padding-bottom: 20px;
+            }
+
+            .footer-item:last-child {
+                border-bottom: none;
+                padding-bottom: 0;
+            }
         }
-        /* --- ESTILOS PARA LA PÁGINA DE CAMPEONES --- */
-.champions-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 30px;
-    margin-top: 30px;
-}
-
-.discipline-title {
-    font-family: var(--font-titulos);
-    font-size: 2.2rem;
-    color: var(--color-texto);
-    text-align: center;
-    margin-top: 50px;
-    margin-bottom: 20px;
-    border-bottom: 2px solid var(--color-light-gray);
-    padding-bottom: 15px;
-}
-#page-campeones .discipline-title:first-of-type {
-    margin-top: 20px;
-}
-
-.champion-card {
-    background-color: white;
-    border-radius: 10px;
-    text-align: center;
-    padding: 25px 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.champion-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-}
-
-.champion-card .champion-photo {
-    width: 160px;
-    height: 160px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 5px solid #FFD700; /* Borde dorado de campeón */
-    margin-bottom: 15px;
-}
-
-.champion-card .champion-name {
-    font-family: var(--font-titulos);
-    font-size: 1.5rem;
-    margin: 0 0 5px 0;
-    color: var(--color-texto);
-}
-
-.champion-card .champion-category {
-    font-family: var(--font-cuerpo);
-    font-size: 1rem;
-    font-weight: bold;
-    color: var(--color-principal);
-}
-
-/* --- ESTILOS PARA TEXTOS INTRODUCTORIOS DE CAMPEONES --- */
-.section-intro-text {
-    font-family: var(--font-cuerpo);
-    text-align: center;
-    font-size: 1.1rem;
-    line-height: 1.6;
-    max-width: 800px;
-    margin: 20px auto 50px auto; /* Aumenta el margen inferior para separar del primer título de disciplina */
-    color: #555;
-}
-
-.discipline-intro-text {
-    font-family: var(--font-cuerpo);
-    text-align: center;
-    font-size: 1rem;
-    max-width: 700px;
-    margin: 15px auto 30px auto;
-    color: #666;
-}
-
     </style>
 </head>
+
 <body>
     <header class="main-header">
         <a href="#" class="nav-link" data-target="page-inicio"><img src="promocionales/logo_campeonato_enduro.png" alt="Logo Campeonato Extremo Sur" class="logo"></a>
@@ -366,7 +751,9 @@
     <div class="page-overlay" id="page-overlay"></div>
 
     <main>
+
         <div id="page-inicio" class="page-view">
+
             <section class="hero-section">
                 <div class="hero-gallery">
                     <div class="gallery-item"><img src="wallpapers/wallpaper_1.png" alt="Imagen de Enduro 1"></div>
@@ -380,68 +767,130 @@
                     <p>El campeonato más desafiante de la Patagonia</p>
                 </div>
             </section>
+
             <section class="dates-section">
                 <div class="container">
-                    <div class="center-title"><h2 class="section-title">Próximas Fechas 2025-2026</h2></div>
+                    <div class="center-title">
+                        <h2 class="section-title">Próximas Fechas 2025-2026</h2>
+                    </div>
                     <div class="dates-grid">
                         <img src="promocionales/promocional_campeonato_2025_1.jpeg" alt="Fechas Campeonato Enduro 2025-2026" class="promo-image">
                         <img src="promocionales/promocional_campeonato_2025_2.jpeg" alt="Fechas Campeonato Motocross 2025-2026" class="promo-image">
                     </div>
                 </div>
             </section>
+
+            <section class="info-section">
+                <div class="container">
+                    <div class="center-title">
+                        <h2 class="section-title">Información Importante</h2>
+                    </div>
+                    <div class="countdown-banner">
+                        <h4>¡Prepárate! Faltan solo para la primera fecha del campeonato:</h4>
+                        <div id="countdown" class="countdown-timer">
+                            <div class="countdown-item">
+                                <span id="days">00</span>
+                                <div class="label">Días</div>
+                            </div>
+                            <div class="countdown-item">
+                                <span id="hours">00</span>
+                                <div class="label">Horas</div>
+                            </div>
+                            <div class="countdown-item">
+                                <span id="minutes">00</span>
+                                <div class="label">Minutos</div>
+                            </div>
+                            <div class="countdown-item">
+                                <span id="seconds">00</span>
+                                <div class="label">Segundos</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="location-grid">
+                        <div class="info-block" style="margin-top: 0;">
+                            <h4>📍 Ubicación del Evento</h4>
+                            <p>El Campeonato Extremo Sur se lleva a cabo en los desafiantes terrenos de Punta Arenas. Un escenario único que promete emoción y adrenalina para pilotos y espectadores por igual. ¡Te esperamos para vivir la pasión del Off-Road!</p>
+                            <p><strong>Dirección estimada:</strong> Ruta 9 Km 15, Punta Arenas.</p>
+                        </div>
+                        <div class="map-container">
+                            <div class="map-responsive">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d80318.23235949539!2d-70.9859524410189!3d-53.15312155776099!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xbdb2c042e6978593%3A0x2885971a5d25916!2sPunta%20Arenas%2C%20Magallanes%20y%20la%20Ant%C3%A1rtica%20Chilena!5e0!3m2!1ses-419!2scl!4v1725033481605!5m2!1ses-419!2scl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-block">
+                        <h4>📄 Reglamento Oficial</h4>
+                        <p>Es fundamental que todos los participantes y equipos revisen el reglamento oficial del campeonato para conocer las bases, categorías, normas de seguridad y puntajes. Asegúrate de estar al tanto de todas las disposiciones.</p>
+                        <p><a href="#" class="nav-link" data-target="page-reglamento">Descargar y leer el Reglamento aquí</a></p>
+                    </div>
+                    <div class="info-block">
+                        <h4>📞 Contacto</h4>
+                        <p>Si tienes dudas, consultas o necesitas asistencia, no dudes en contactarnos. Nuestro equipo estará encantado de ayudarte con cualquier requerimiento relacionado con el campeonato.</p>
+                        <p><strong>Teléfono:</strong> +56 9 1234 5678</p>
+                        <p><strong>Email:</strong> <a href="mailto:magallanesenduromx@gmail.com">magallanesenduromx@gmail.com</a></p>
+                    </div>
+                </div>
+            </section>
+
             <section class="clubs-section">
                 <div class="container">
-                    <div class="center-title"><h2 class="section-title">Clubes Participantes</h2></div>
+                    <div class="center-title">
+                        <h2 class="section-title">Clubes Participantes</h2>
+                    </div>
                     <div class="clubs-grid">
                         <div class="club-card">
                             <h3>ENDUCROSS MOTO CLUB</h3>
                             <p>Descripción ficticia del club. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                             <img src="auspicios/logo_enducross_moto_club.jpeg" alt="Logo ENDUCROSS MOTO CLUB">
+                            <a href="https://www.instagram.com/enducross_motoclub/" target="_blank" class="club-instagram-link"><i class="fab fa-instagram"></i></a>
                         </div>
                         <div class="club-card">
                             <h3>HIELO SUR MOTO CLUB</h3>
                             <p>Descripción ficticia del club. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                             <img src="auspicios/logo_hielo_sur_moto_club.jpeg" alt="Logo HIELO SUR MOTO CLUB">
+                            <a href="https://www.instagram.com/hielosurmc/" target="_blank" class="club-instagram-link"><i class="fab fa-instagram"></i></a>
                         </div>
                         <div class="club-card">
                             <h3>PATAGONIA MOTO CLUB</h3>
                             <p>Descripción ficticia del club. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                             <img src="auspicios/logo_patagonia_moto_club.jpeg" alt="Logo PATAGONIA MOTO CLUB">
+                            <a href="https://www.instagram.com/patagoniamotoclub/" target="_blank" class="club-instagram-link"><i class="fab fa-instagram"></i></a>
                         </div>
                         <div class="club-card">
-                             <h3>CLUB DE MOTOCICLISMO PUERTO NATALES</h3>
-                             <p>Descripción ficticia del club. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                             <img src="auspicios/logo_club_motociclismo_puertonatales.jpeg" alt="Logo CLUB DE MOTOCICLISMO PUERTO NATALES">
+                            <h3>CLUB DE MOTOCICLISMO PUERTO NATALES</h3>
+                            <p>Descripción ficticia del club. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <img src="auspicios/logo_club_motociclismo_puertonatales.jpeg" alt="Logo CLUB DE MOTOCICLISMO PUERTO NATALES">
+                            <a href="#" target="_blank" class="club-instagram-link"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>
             </section>
+            
             <section class="video-section">
                 <div class="container">
-                    <div class="center-title"><h2 class="section-title">Videos Destacados</h2></div>
+                    <div class="center-title">
+                        <h2 class="section-title">Videos Destacados</h2>
+                    </div>
                     <div class="video-wrapper">
-                        <iframe 
-                            src="https://www.youtube.com/embed/ianI0icQZfw" 
-                            title="YouTube video player" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                        </iframe>
+                        <iframe src="https://www.youtube.com/embed/ianI0icQZfw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
             </section>
-        </div>
 
-        <div id="page-reglamento" class="page-view">
-             <div class="container">
-                <div class="center-title"><h2 class="section-title">Reglamento</h2></div>
+        </div> <div id="page-reglamento" class="page-view">
+            <div class="container">
+                <div class="center-title">
+                    <h2 class="section-title">Reglamento</h2>
+                </div>
                 <p class="placeholder-text">El reglamento oficial del campeonato estará disponible próximamente en esta sección.</p>
             </div>
         </div>
 
         <div id="page-resultados" class="page-view">
             <div class="container">
-                <div class="center-title"><h2 class="section-title">Selecciona una Categoría</h2></div>
+                <div class="center-title">
+                    <h2 class="section-title">Selecciona una Categoría</h2>
+                </div>
                 <div class="results-category-grid">
                     <a href="#" class="nav-link category-link" data-target="view-atv-experto">ATV EXPERTO</a>
                     <a href="#" class="nav-link category-link" data-target="view-atv-master-a">ATV MASTER A</a>
@@ -459,206 +908,90 @@
                 </div>
             </div>
         </div>
-                <div id="page-campeones" class="page-view">
+        
+        <div id="page-campeones" class="page-view">
             <div class="container">
-                <div class="center-title"><h2 class="section-title">Campeones Vigentes 2024-2025</h2></div>
+                <div class="center-title">
+                    <h2 class="section-title">Campeones Vigentes 2024-2025</h2>
+                </div>
                 <p class="section-intro-text">
-    El Campeonato Extremo Sur pone a prueba la tenacidad y habilidad de los mejores pilotos de la Patagonia. A través de barro, viento y terrenos implacables, solo los más dedicados logran alcanzar la gloria. Extendemos nuestras más sinceras felicitaciones a los campeones de la temporada 2024-2025, quienes han demostrado una destreza y un espíritu inquebrantable.
-</p>
+                    El Campeonato Extremo Sur pone a prueba la tenacidad y habilidad de los mejores pilotos de la Patagonia. A través de barro, viento y terrenos implacables, solo los más dedicados logran alcanzar la gloria. Extendemos nuestras más sinceras felicitaciones a los campeones de la temporada 2024-2025, quienes han demostrado una destreza y un espíritu inquebrantable.
+                </p>
 
                 <h3 class="discipline-title">MOTOCROSS</h3>
                 <p class="discipline-intro-text">
-    Una disciplina de pura velocidad, saltos espectaculares y agilidad técnica en circuitos desafiantes. A continuación, presentamos a los pilotos que dominaron cada categoría con potencia y precisión.
-</p>
+                    Una disciplina de pura velocidad, saltos espectaculares y agilidad técnica en circuitos desafiantes. A continuación, presentamos a los pilotos que dominaron cada categoría con potencia y precisión.
+                </p>
                 <div class="champions-grid">
-                    <div class="champion-card">
-                        <img src="campeones/sebastian_alvarez.jpeg" alt="Foto de Sebastian Alvarez" class="champion-photo">
-                        <h4 class="champion-name">Sebastian Alvarez</h4>
-                        <p class="champion-category">Experto</p>
-                    </div>
-                    <div class="champion-card">
-                        <img src="campeones/pablo_paredes.jpeg" alt="Foto de Pablo Paredes" class="champion-photo">
-                        <h4 class="champion-name">Pablo Paredes</h4>
-                        <p class="champion-category">Open</p>
-                    </div>
-                    <div class="champion-card">
-                        <img src="campeones/diego_alvarez.jpeg" alt="Foto de Diego Alvarez" class="champion-photo">
-                        <h4 class="champion-name">Diego Alvarez</h4>
-                        <p class="champion-category">Master A</p>
-                    </div>
-                     <div class="champion-card">
-                        <img src="campeones/pablo_paredes.jpeg" alt="Foto de Pablo Paredes" class="champion-photo">
-                        <h4 class="champion-name">Pablo Paredes</h4>
-                        <p class="champion-category">Master C</p>
-                    </div>
-                    <div class="champion-card">
-                        <img src="campeones/branko_lefoll.jpeg" alt="Foto de Branko Lefoll" class="champion-photo">
-                        <h4 class="champion-name">Branko Lefoll</h4>
-                        <p class="champion-category">Promocional</p>
-                    </div>
-                    <div class="champion-card">
-                        <img src="campeones/bastian_vargas.jpeg" alt="Foto de Bastian Vargas" class="champion-photo">
-                        <h4 class="champion-name">Bastian Vargas</h4>
-                        <p class="champion-category">ATV Experto</p>
-                    </div>
-                    <div class="champion-card">
-                        <img src="campeones/vicente_krautz_1.jpeg" alt="Foto de Vicente Krautz" class="champion-photo">
-                        <h4 class="champion-name">Vicente Krautz</h4>
-                        <p class="champion-category">ATV Open</p>
-                    </div>
-                    <div class="champion-card">
-                        <img src="campeones/francisco_ampuero.jpeg" alt="Foto de Francisco Ampuero" class="champion-photo">
-                        <h4 class="champion-name">Francisco Ampuero</h4>
-                        <p class="champion-category">ATV Promocional</p>
-                    </div>
-                    <div class="champion-card">
-                        <img src="campeones/ciro_diaz.jpeg" alt="Foto de Ciro Diaz" class="champion-photo">
-                        <h4 class="champion-name">Ciro Diaz</h4>
-                        <p class="champion-category">50 Mini</p>
-                    </div>
-                    <div class="champion-card">
-                        <img src="campeones/santiago_toro.jpeg" alt="Foto de Santiago Toro" class="champion-photo">
-                        <h4 class="champion-name">Santiago Toro</h4>
-                        <p class="champion-category">50CC</p>
-                    </div>
-                    <div class="champion-card">
-                        <img src="campeones/jeremias_aguilar.jpeg" alt="Foto de Jeremias Aguilar" class="champion-photo">
-                        <h4 class="champion-name">Jeremias Aguilar</h4>
-                        <p class="champion-category">65CC</p>
-                    </div>
-                     <div class="champion-card">
-                        <img src="campeones/pablo_paredes.jpeg" alt="Foto de Pablo Paredes" class="champion-photo">
-                        <h4 class="champion-name">Pablo Paredes</h4>
-                        <p class="champion-category">85CC</p>
-                    </div>
-                    <div class="champion-card">
-                        <img src="campeones/ludmila_roman.jpeg" alt="Foto de Ludmila Roman" class="champion-photo">
-                        <h4 class="champion-name">Ludmila Roman</h4>
-                        <p class="champion-category">ATV 125B</p>
-                    </div>
-                    <div class="champion-card">
-                        <img src="campeones/diego_diaz.jpeg" alt="Foto de Diego Diaz" class="champion-photo">
-                        <h4 class="champion-name">Diego Diaz</h4>
-                        <p class="champion-category">ATV 125 Pro</p>
-                    </div>
+                    <div class="champion-card"><img src="campeones/sebastian_alvarez.jpeg" alt="Foto de Sebastian Alvarez" class="champion-photo"><h4 class="champion-name">Sebastian Alvarez</h4><p class="champion-category">Experto</p></div>
+                    <div class="champion-card"><img src="campeones/pablo_paredes.jpeg" alt="Foto de Pablo Paredes" class="champion-photo"><h4 class="champion-name">Pablo Paredes</h4><p class="champion-category">Open</p></div>
+                    <div class="champion-card"><img src="campeones/diego_alvarez.jpeg" alt="Foto de Diego Alvarez" class="champion-photo"><h4 class="champion-name">Diego Alvarez</h4><p class="champion-category">Master A</p></div>
+                    <div class="champion-card"><img src="campeones/pablo_paredes.jpeg" alt="Foto de Pablo Paredes" class="champion-photo"><h4 class="champion-name">Pablo Paredes</h4><p class="champion-category">Master C</p></div>
+                    <div class="champion-card"><img src="campeones/branko_lefoll.jpeg" alt="Foto de Branko Lefoll" class="champion-photo"><h4 class="champion-name">Branko Lefoll</h4><p class="champion-category">Promocional</p></div>
+                    <div class="champion-card"><img src="campeones/bastian_vargas.jpeg" alt="Foto de Bastian Vargas" class="champion-photo"><h4 class="champion-name">Bastian Vargas</h4><p class="champion-category">ATV Experto</p></div>
+                    <div class="champion-card"><img src="campeones/vicente_krautz_1.jpeg" alt="Foto de Vicente Krautz" class="champion-photo"><h4 class="champion-name">Vicente Krautz</h4><p class="champion-category">ATV Open</p></div>
+                    <div class="champion-card"><img src="campeones/francisco_ampuero.jpeg" alt="Foto de Francisco Ampuero" class="champion-photo"><h4 class="champion-name">Francisco Ampuero</h4><p class="champion-category">ATV Promocional</p></div>
+                    <div class="champion-card"><img src="campeones/ciro_diaz.jpeg" alt="Foto de Ciro Diaz" class="champion-photo"><h4 class="champion-name">Ciro Diaz</h4><p class="champion-category">50 Mini</p></div>
+                    <div class="champion-card"><img src="campeones/santiago_toro.jpeg" alt="Foto de Santiago Toro" class="champion-photo"><h4 class="champion-name">Santiago Toro</h4><p class="champion-category">50CC</p></div>
+                    <div class="champion-card"><img src="campeones/jeremias_aguilar.jpeg" alt="Foto de Jeremias Aguilar" class="champion-photo"><h4 class="champion-name">Jeremias Aguilar</h4><p class="champion-category">65CC</p></div>
+                    <div class="champion-card"><img src="campeones/pablo_paredes.jpeg" alt="Foto de Pablo Paredes" class="champion-photo"><h4 class="champion-name">Pablo Paredes</h4><p class="champion-category">85CC</p></div>
+                    <div class="champion-card"><img src="campeones/ludmila_roman.jpeg" alt="Foto de Ludmila Roman" class="champion-photo"><h4 class="champion-name">Ludmila Roman</h4><p class="champion-category">ATV 125B</p></div>
+                    <div class="champion-card"><img src="campeones/diego_diaz.jpeg" alt="Foto de Diego Diaz" class="champion-photo"><h4 class="champion-name">Diego Diaz</h4><p class="champion-category">ATV 125 Pro</p></div>
                 </div>
 
                 <h3 class="discipline-title">ENDURO</h3>
                 <p class="discipline-intro-text">
-    La prueba definitiva de resistencia y estrategia, donde los pilotos se enfrentan a largos y variados recorridos a través de la naturaleza patagónica. A continuación, los campeones que demostraron una increíble capacidad de adaptación y perseverancia.
-</p>
-                 <div class="champions-grid">
-                    <div class="champion-card">
-                        <img src="campeones/gaston_leonardelli.jpeg" alt="Foto de Gaston Leonardelli" class="champion-photo">
-                        <h4 class="champion-name">Gaston Leonardelli</h4>
-                        <p class="champion-category">Experto</p>
-                    </div>
-                    <div class="champion-card">
-                        <img src="campeones/carlos_alarcon.jpeg" alt="Foto de Carlos Alarcon" class="champion-photo">
-                        <h4 class="champion-name">Carlos Alarcon</h4>
-                        <p class="champion-category">Open</p>
-                    </div>
-                    <div class="champion-card">
-                        <img src="campeones/rodrigo_gonzalez.jpeg" alt="Foto de Rodrigo Gonzalez" class="champion-photo">
-                        <h4 class="champion-name">Rodrigo Gonzalez</h4>
-                        <p class="champion-category">Master A</p>
-                    </div>
-                    <div class="champion-card">
-                        <img src="campeones/humberto_pacheco.jpeg" alt="Foto de Humberto Pacheco" class="champion-photo">
-                        <h4 class="champion-name">Humberto Pacheco</h4>
-                        <p class="champion-category">Master B</p>
-                    </div>
-                    <div class="champion-card">
-                        <img src="campeones/pablo_paredes.jpeg" alt="Foto de Pablo Paredes" class="champion-photo">
-                        <h4 class="champion-name">Pablo Paredes</h4>
-                        <p class="champion-category">Master C</p>
-                    </div>
-                    <div class="champion-card">
-                        <img src="campeones/pablo_paredes.jpeg" alt="Foto de Pablo Paredes" class="champion-photo">
-                        <h4 class="champion-name">Pablo Paredes</h4>
-                        <p class="champion-category">Promocional</p>
-                    </div>
-                    <div class="champion-card">
-                        <img src="campeones/gonzalo_marquez.jpeg" alt="Foto de Gonzalo Marquez" class="champion-photo">
-                        <h4 class="champion-name">Gonzalo Marquez</h4>
-                        <p class="champion-category">ATV Experto</p>
-                    </div>
-                     <div class="champion-card">
-                        <img src="campeones/pablo_vera.jpeg" alt="Foto de Pablo Vera" class="champion-photo">
-                        <h4 class="champion-name">Pablo Vera</h4>
-                        <p class="champion-category">ATV Master A</p>
-                    </div>
-                     <div class="champion-card">
-                        <img src="campeones/walter_brauning.jpeg" alt="Foto de Walter Brauning" class="champion-photo">
-                        <h4 class="champion-name">Walter Brauning</h4>
-                        <p class="champion-category">ATV Master B</p>
-                    </div>
-                    <div class="champion-card">
-                        <img src="campeones/carlos_mendoza.jpeg" alt="Foto de Carlos Mendoza" class="champion-photo">
-                        <h4 class="champion-name">Carlos Mendoza</h4>
-                        <p class="champion-category">ATV Master C</p>
-                    </div>
-                    <div class="champion-card">
-                        <img src="campeones/eduardo_alarcon.jpeg" alt="Foto de Eduardo Alarcon" class="champion-photo">
-                        <h4 class="champion-name">Eduardo Alarcon</h4>
-                        <p class="champion-category">ATV Open</p>
-                    </div>
-                    <div class="champion-card">
-                        <img src="campeones/lukas_buljan.jpeg" alt="Foto de Lukas Buljan" class="champion-photo">
-                        <h4 class="champion-name">Lukas Buljan</h4>
-                        <p class="champion-category">ATV Promocional</p>
-                    </div>
-                    <div class="champion-card">
-                        <img src="campeones/milan_beros.jpeg" alt="Foto de Milan Beros" class="champion-photo">
-                        <h4 class="champion-name">Milan Beros</h4>
-                        <p class="champion-category">50 Mini</p>
-                    </div>
-                    <div class="champion-card">
-                        <img src="campeones/jose_tomas_miranda.jpeg" alt="Foto de Jose Tomas Miranda" class="champion-photo">
-                        <h4 class="champion-name">Jose Tomas Miranda</h4>
-                        <p class="champion-category">65CC</p>
-                    </div>
-                    <div class="champion-card">
-                        <img src="campeones/pablo_paredes.jpeg" alt="Foto de Pablo Paredes" class="champion-photo">
-                        <h4 class="champion-name">Pablo Paredes</h4>
-                        <p class="champion-category">85CC</p>
-                    </div>
-                    <div class="champion-card">
-                        <img src="campeones/esteban_paredes.jpeg" alt="Foto de Esteban Paredes" class="champion-photo">
-                        <h4 class="champion-name">Esteban Paredes</h4>
-                        <p class="champion-category">ATV 125B</p>
-                    </div>
-                    <div class="champion-card">
-                        <img src="campeones/isidora_solis.jpeg" alt="Foto de Isidora Solis" class="champion-photo">
-                        <h4 class="champion-name">Isidora Solis</h4>
-                        <p class="champion-category">ATV 125 Pro</p>
-                    </div>
-                     <div class="champion-card">
-                        <img src="campeones/vicente_vidal.jpeg" alt="Foto de Vicente Vidal" class="champion-photo">
-                        <h4 class="champion-name">Vicente Vidal</h4>
-                        <p class="champion-category">ATV 125A</p>
-                    </div>
-                    <div class="champion-card">
-                        <img src="campeones/florencia_vidal.jpeg" alt="Foto de Florencia Vidal" class="champion-photo">
-                        <h4 class="champion-name">Florencia Vidal</h4>
-                        <p class="champion-category">ATV 50</p>
-                    </div>
+                    La prueba definitiva de resistencia y estrategia, donde los pilotos se enfrentan a largos y variados recorridos a través de la naturaleza patagónica. A continuación, los campeones que demostraron una increíble capacidad de adaptación y perseverancia.
+                </p>
+                <div class="champions-grid">
+                    <div class="champion-card"><img src="campeones/gaston_leonardelli.jpeg" alt="Foto de Gaston Leonardelli" class="champion-photo"><h4 class="champion-name">Gaston Leonardelli</h4><p class="champion-category">Experto</p></div>
+                    <div class="champion-card"><img src="campeones/carlos_alarcon.jpeg" alt="Foto de Carlos Alarcon" class="champion-photo"><h4 class="champion-name">Carlos Alarcon</h4><p class="champion-category">Open</p></div>
+                    <div class="champion-card"><img src="campeones/rodrigo_gonzalez.jpeg" alt="Foto de Rodrigo Gonzalez" class="champion-photo"><h4 class="champion-name">Rodrigo Gonzalez</h4><p class="champion-category">Master A</p></div>
+                    <div class="champion-card"><img src="campeones/humberto_pacheco.jpeg" alt="Foto de Humberto Pacheco" class="champion-photo"><h4 class="champion-name">Humberto Pacheco</h4><p class="champion-category">Master B</p></div>
+                    <div class="champion-card"><img src="campeones/pablo_paredes.jpeg" alt="Foto de Pablo Paredes" class="champion-photo"><h4 class="champion-name">Pablo Paredes</h4><p class="champion-category">Master C</p></div>
+                    <div class="champion-card"><img src="campeones/pablo_paredes.jpeg" alt="Foto de Pablo Paredes" class="champion-photo"><h4 class="champion-name">Pablo Paredes</h4><p class="champion-category">Promocional</p></div>
+                    <div class="champion-card"><img src="campeones/gonzalo_marquez.jpeg" alt="Foto de Gonzalo Marquez" class="champion-photo"><h4 class="champion-name">Gonzalo Marquez</h4><p class="champion-category">ATV Experto</p></div>
+                    <div class="champion-card"><img src="campeones/pablo_vera.jpeg" alt="Foto de Pablo Vera" class="champion-photo"><h4 class="champion-name">Pablo Vera</h4><p class="champion-category">ATV Master A</p></div>
+                    <div class="champion-card"><img src="campeones/walter_brauning.jpeg" alt="Foto de Walter Brauning" class="champion-photo"><h4 class="champion-name">Walter Brauning</h4><p class="champion-category">ATV Master B</p></div>
+                    <div class="champion-card"><img src="campeones/carlos_mendoza.jpeg" alt="Foto de Carlos Mendoza" class="champion-photo"><h4 class="champion-name">Carlos Mendoza</h4><p class="champion-category">ATV Master C</p></div>
+                    <div class="champion-card"><img src="campeones/eduardo_alarcon.jpeg" alt="Foto de Eduardo Alarcon" class="champion-photo"><h4 class="champion-name">Eduardo Alarcon</h4><p class="champion-category">ATV Open</p></div>
+                    <div class="champion-card"><img src="campeones/lukas_buljan.jpeg" alt="Foto de Lukas Buljan" class="champion-photo"><h4 class="champion-name">Lukas Buljan</h4><p class="champion-category">ATV Promocional</p></div>
+                    <div class="champion-card"><img src="campeones/milan_beros.jpeg" alt="Foto de Milan Beros" class="champion-photo"><h4 class="champion-name">Milan Beros</h4><p class="champion-category">50 Mini</p></div>
+                    <div class="champion-card"><img src="campeones/jose_tomas_miranda.jpeg" alt="Foto de Jose Tomas Miranda" class="champion-photo"><h4 class="champion-name">Jose Tomas Miranda</h4><p class="champion-category">65CC</p></div>
+                    <div class="champion-card"><img src="campeones/pablo_paredes.jpeg" alt="Foto de Pablo Paredes" class="champion-photo"><h4 class="champion-name">Pablo Paredes</h4><p class="champion-category">85CC</p></div>
+                    <div class="champion-card"><img src="campeones/esteban_paredes.jpeg" alt="Foto de Esteban Paredes" class="champion-photo"><h4 class="champion-name">Esteban Paredes</h4><p class="champion-category">ATV 125B</p></div>
+                    <div class="champion-card"><img src="campeones/isidora_solis.jpeg" alt="Foto de Isidora Solis" class="champion-photo"><h4 class="champion-name">Isidora Solis</h4><p class="champion-category">ATV 125 Pro</p></div>
+                    <div class="champion-card"><img src="campeones/vicente_vidal.jpeg" alt="Foto de Vicente Vidal" class="champion-photo"><h4 class="champion-name">Vicente Vidal</h4><p class="champion-category">ATV 125A</p></div>
+                    <div class="champion-card"><img src="campeones/florencia_vidal.jpeg" alt="Foto de Florencia Vidal" class="champion-photo"><h4 class="champion-name">Florencia Vidal</h4><p class="champion-category">ATV 50</p></div>
                 </div>
             </div>
         </div>
 
         <div id="view-atv-experto" class="page-view">
             <div class="container">
-                <div class="center-title"><h2 class="section-title">Resultados: ATV Experto</h2></div>
+                <div class="center-title">
+                    <h2 class="section-title">Resultados: ATV Experto</h2>
+                </div>
                 <div class="ranking-top3">
-                    <div class="pilot-card p2"><img src="pilotos/piloto_2.jpeg" alt="Foto de Ignacio Diaz"><h3>Ignacio Diaz</h3><p class="place">2do Lugar - 208 Puntos</p></div>
-                    <div class="pilot-card p1"><img src="pilotos/piloto_1.jpeg" alt="Foto de Bastian Vargas"><h3>Bastian Vargas</h3><p class="place">1er Lugar - 214 Puntos</p></div>
-                    <div class="pilot-card p3"><img src="pilotos/piloto_3.jpeg" alt="Foto de Gonzalo Marquez"><h3>Gonzalo Marquez</h3><p class="place">3er Lugar - 134 Puntos</p></div>
+                    <div class="pilot-card p2"><img src="pilotos/piloto_2.jpeg" alt="Foto de Ignacio Diaz">
+                        <h3>Ignacio Diaz</h3>
+                        <p class="place">2do Lugar - 208 Puntos</p>
+                    </div>
+                    <div class="pilot-card p1"><img src="pilotos/piloto_1.jpeg" alt="Foto de Bastian Vargas">
+                        <h3>Bastian Vargas</h3>
+                        <p class="place">1er Lugar - 214 Puntos</p>
+                    </div>
+                    <div class="pilot-card p3"><img src="pilotos/piloto_3.jpeg" alt="Foto de Gonzalo Marquez">
+                        <h3>Gonzalo Marquez</h3>
+                        <p class="place">3er Lugar - 134 Puntos</p>
+                    </div>
                 </div>
                 <div class="results-table-wrapper">
                     <table class="results-table">
                         <thead>
-                            <tr><th>Categoría</th><th>N°</th><th>Nombre Piloto</th><th>1ª Fecha</th><th>2ª Fecha</th><th>3ª Fecha</th><th>4ª Fecha</th><th>5ª Fecha</th><th>6ª Fecha</th><th>Total</th><th>Lugar</th></tr>
+                            <tr>
+                                <th>Categoría</th><th>N°</th><th>Nombre Piloto</th><th>1ª Fecha</th><th>2ª Fecha</th><th>3ª Fecha</th><th>4ª Fecha</th><th>5ª Fecha</th><th>6ª Fecha</th><th>Total</th><th>Lugar</th>
+                            </tr>
                         </thead>
                         <tbody>
                             <tr><td>ATV EXPERTO</td><td>106</td><td>BASTIAN VARGAS</td><td>40</td><td>34</td><td>40</td><td>30</td><td>40</td><td>30</td><td>214</td><td>1</td></tr>
@@ -676,7 +1009,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div id="view-atv-master-a" class="page-view"><div class="container"><div class="center-title"><h2 class="section-title">Resultados: ATV Master A</h2></div><p class="placeholder-text">Aún no hay datos de resultados disponibles para esta categoría.</p></div></div>
         <div id="view-atv-open" class="page-view"><div class="container"><div class="center-title"><h2 class="section-title">Resultados: ATV Open</h2></div><p class="placeholder-text">Aún no hay datos de resultados disponibles para esta categoría.</p></div></div>
         <div id="view-atv-master-b" class="page-view"><div class="container"><div class="center-title"><h2 class="section-title">Resultados: ATV Master B</h2></div><p class="placeholder-text">Aún no hay datos de resultados disponibles para esta categoría.</p></div></div>
@@ -694,25 +1027,59 @@
 
     <footer class="main-footer">
         <div class="container">
-            <h4 class="footer-title">Con la participación de:</h4>
-                <div class="footer-clubs-grid">
-                    <a href="https://www.instagram.com/enducross_motoclub/" target="_blank">
-                        <img src="auspicios/logo_enducross_moto_club.jpeg" alt="Logo ENDUCROSS MOTO CLUB" class="club-logo-footer">
-                    </a>
-                    <a href="https://www.instagram.com/hielosurmc/" target="_blank">
-                        <img src="auspicios/logo_hielo_sur_moto_club.jpeg" alt="Logo HIELO SUR MOTO CLUB" class="club-logo-footer">
-                    </a>
-                    <a href="https://www.instagram.com/patagoniamotoclub/" target="_blank">
-                        <img src="auspicios/logo_patagonia_moto_club.jpeg" alt="Logo PATAGONIA MOTO CLUB" class="club-logo-footer">
-                    </a>
-                    <a href="https://www.instagram.com" target="_blank">
-                        <img src="auspicios/logo_club_motociclismo_puertonatales.jpeg" alt="Logo CLUB DE MOTOCICLISMO PUERTO NATALES" class="club-logo-footer">
-                    </a>
+            <div class="footer-content">
+                <div class="footer-item">
+                    <h4>CAMPEONATO EXTREMO SUR</h4>
+                    <p>&copy; 2024 - Todos los derechos e imágenes reservados.</p>
                 </div>
+                <div class="footer-item">
+                    <h4>CONTACTO CAMPEONATO</h4>
+                    <p><strong>Teléfono:</strong> +56 9 1234 5678</p>
+                    <p><strong>Email:</strong> <a href="mailto:magallanesenduromx@gmail.com">magallanesenduromx@gmail.com</a></p>
+                </div>
+                <div class="footer-item">
+                    <h4>DISEÑO Y DESARROLLO WEB</h4>
+                    <p><strong>Contacto:</strong> +56 9 7177 4151</p>
+                    <p><strong>Email:</strong> <a href="mailto:gastonalexisep@live.cl">gastonalexisep@live.cl</a></p>
+                </div>
+            </div>
         </div>
     </footer>
 
     <script>
+        // --- SCRIPT PARA LA CUENTA REGRESIVA ---
+        function startCountdown() {
+            const countDownDate = new Date("2025-09-27T00:00:00").getTime();
+
+            const countdownFunction = setInterval(function() {
+                const now = new Date().getTime();
+                const distance = countDownDate - now;
+
+                if (distance < 0) {
+                    clearInterval(countdownFunction);
+                    document.getElementById("countdown").innerHTML = "<h4>¡EL CAMPEONATO HA COMENZADO!</h4>";
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                const formatTime = (time) => time < 10 ? `0${time}` : time;
+
+                document.getElementById("days").innerText = formatTime(days);
+                document.getElementById("hours").innerText = formatTime(hours);
+                document.getElementById("minutes").innerText = formatTime(minutes);
+                document.getElementById("seconds").innerText = formatTime(seconds);
+
+            }, 1000);
+        }
+        startCountdown();
+    </script>
+
+    <script>
+        // --- SCRIPT DE NAVEGACIÓN Y MENÚ MÓVIL ---
         document.addEventListener('DOMContentLoaded', function() {
             const navLinks = document.querySelectorAll('.nav-link');
             const allViews = document.querySelectorAll('.page-view');
@@ -720,7 +1087,6 @@
             const mobileNav = document.getElementById('nav-links');
             const pageOverlay = document.getElementById('page-overlay');
 
-            // --- OPTIMIZACIÓN: Función centralizada para manejar el menú móvil ---
             function toggleMobileMenu(forceClose = false) {
                 const isActive = mobileNav.classList.contains('active');
                 if (forceClose || isActive) {
@@ -742,9 +1108,12 @@
                 const targetView = document.getElementById(targetId);
                 if (targetView) {
                     targetView.style.display = 'block';
+                } else {
+                    // Si no se encuentra la vista, mostrar inicio por defecto
+                    document.getElementById('page-inicio').style.display = 'block';
                 }
                 
-                toggleMobileMenu(true); // Cierra el menú móvil al cambiar de vista
+                toggleMobileMenu(true);
                 window.scrollTo(0, 0);
             }
 
@@ -752,7 +1121,7 @@
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     const targetId = this.getAttribute('data-target');
-                    if(targetId) {
+                    if (targetId) {
                        showView(targetId);
                     }
                 });
@@ -761,6 +1130,7 @@
             hamburgerBtn.addEventListener('click', () => toggleMobileMenu());
             pageOverlay.addEventListener('click', () => toggleMobileMenu(true));
 
+            // Mostrar la vista de inicio por defecto al cargar la página
             showView('page-inicio');
         });
     </script>
