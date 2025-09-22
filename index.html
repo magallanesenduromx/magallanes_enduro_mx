@@ -10,6 +10,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <style>
         /* --- VARIABLES GLOBALES Y RESET BÁSICO --- */
@@ -280,6 +282,19 @@
             color: rgba(255, 255, 255, 0.8);
             margin-top: 5px;
         }
+        
+        .first-date-images-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .first-date-images-grid img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
 
         .location-grid {
             display: grid;
@@ -294,6 +309,19 @@
             padding: 30px;
             border-radius: 12px;
             margin-top: 30px;
+        }
+        
+        .info-block ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-block li {
+            font-family: var(--font-cuerpo);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #444;
+            margin-bottom: 10px;
         }
 
         .info-block h4 {
@@ -371,6 +399,10 @@
             text-align: center;
             padding: 20px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .club-card:hover {
@@ -382,23 +414,18 @@
             margin-top: 0;
             color: var(--color-principal);
             font-size: 1.4rem;
-            min-height: 3.8rem;
         }
 
         .club-card img {
             max-width: 100%;
             height: 120px;
             object-fit: contain;
-            margin-top: 15px;
-        }
-
-        .club-card p {
-            font-size: 0.9rem;
+            margin: 15px 0;
         }
 
         .club-instagram-link {
             display: block;
-            margin-top: 20px;
+            margin-top: 15px;
             font-size: 2rem;
             color: #333;
             text-decoration: none;
@@ -410,29 +437,89 @@
             transform: scale(1.1);
         }
 
-        /* --- SECCIÓN VIDEO (INICIO) --- */
-        .video-section {
+        /* --- SECCIÓN MULTIMEDIA (INICIO) --- */
+        .multimedia-section {
             padding: 60px 20px;
             background-color: white;
         }
 
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
+        .swiper-container {
+            position: relative; /* Necesario para que las flechas se posicionen respecto a él */
+            width: 100%;
             max-width: 1000px;
             margin: 0 auto;
-            border: 5px solid var(--color-dark-bg);
             border-radius: 8px;
+            border: 5px solid var(--color-dark-bg);
+            /* Añadimos overflow hidden para que las esquinas redondeadas se apliquen bien */
+            overflow: hidden; 
+            aspect-ratio: 16 / 9; /* ¡La clave! Le da la altura correcta */
+
         }
 
-        .video-wrapper iframe {
+        /* Contenedor principal de cada slide */
+        .swiper-slide {
+            background-color: #000; /* Un fondo negro base */
+        }
+
+        /* NUEVO: Este es el contenedor que asegura el tamaño uniforme */
+        .swiper-slide .slide-content {
+            position: relative;
+            width: 100%;
+            /* Proporción 16:9 - Esta es la clave para la altura consistente */
+            padding-bottom: 56.25%; 
+            height: 0; /* Necesario para que el truco del padding funcione */
+            overflow: hidden;
+        }
+
+        /* NUEVO: Estilo unificado para que imágenes y videos llenen el contenedor */
+        .swiper-slide .slide-content img,
+        .swiper-slide .slide-content iframe {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            /* ¡Esta es la magia! Hace que la imagen cubra todo el espacio sin deformarse */
+            object-fit: cover; 
+            border: none; /* Quita cualquier borde del iframe */
+        }
+
+        /* --- ESTILOS MEJORADOS PARA LOS CONTROLES DEL CARRUSEL --- */
+
+        /* Posicionamiento y estilo de las Flechas (Izquierda y Derecha) */
+        .swiper-button-next,
+        .swiper-button-prev {
+            /* Usamos las variables de Swiper para el tamaño y color */
+            --swiper-navigation-size: 35px; /* Tamaño de la flecha */
+            --swiper-navigation-color: #ffffff; /* Color de la flecha: blanco */
+
+            background-color: rgba(0, 0, 0, 0.3); /* Fondo semitransparente para que resalte */
+            width: 50px; /* Ancho del área del botón */
+            height: 50px; /* Alto del área del botón */
+            border-radius: 50%; /* Lo hacemos circular */
+            transition: background-color 0.3s ease; /* Transición suave al pasar el mouse */
+        }
+
+        /* Efecto hover para cuando el usuario pasa el mouse por encima */
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+
+        /* Estilo de los Puntos de Paginación (los círculos de abajo) */
+        .swiper-pagination {
+            /* Con estas variables, le damos nuestro color principal a los puntos */
+            --swiper-pagination-color: var(--color-principal); /* Color del punto activo */
+            --swiper-pagination-bullet-inactive-color: #f0c1c1; /* Color de los puntos inactivos */
+            --swiper-pagination-bullet-inactive-opacity: 0.5;
+            
+            /* Fondo para asegurar que los puntos se vean sobre cualquier imagen */
+            background-color: rgba(0, 0, 0, 0.25);
+            padding: 5px 0; /* Un poco de espacio interno */
+            border-radius: 0 0 8px 8px; /* Redondeamos las esquinas inferiores */
+            position: absolute; /* Nos aseguramos que quede abajo */
+            bottom: 0 !important;
         }
         
         /* --- PÁGINA DE CAMPEONES --- */
@@ -450,7 +537,7 @@
             text-align: center;
             margin-top: 50px;
             margin-bottom: 20px;
-            border-bottom: 2px solid var(--color-light-gray);
+            border-bottom: 2px solid #ddd;
             padding-bottom: 15px;
         }
 
@@ -519,6 +606,7 @@
             text-align: center;
             font-size: 1.2rem;
             color: #666;
+            padding: 40px 0;
         }
 
         .results-category-grid {
@@ -732,6 +820,18 @@
                 padding-bottom: 0;
             }
         }
+        .payment-container {
+        display: flex; /* Activa el modo Flexbox */
+        justify-content: space-between; /* Empuja los elementos a los extremos */
+        flex-wrap: wrap; /* Permite que se apilen en pantallas pequeñas */
+        gap: 20px; /* Añade un espacio entre ellos */
+        }
+
+        .payment-details,
+        .registration-fees {
+        flex: 1; /* Hace que ambos grupos compartan el espacio disponible */
+        min-width: 250px; /* Ancho mínimo antes de que se apilen verticalmente */
+        }
     </style>
 </head>
 
@@ -807,23 +907,61 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="first-date-images-grid">
+                        <img src="promocionales/promocional_campeonato_2025_fecha_1_1.jpeg" alt="Promocional primera fecha 1" class="promo-image">
+                        <img src="promocionales/promocional_campeonato_2025_fecha_1_2.jpeg" alt="Promocional primera fecha 2" class="promo-image">
+                        <img src="promocionales/promocional_campeonato_2025_fecha_1_3.jpeg" alt="Promocional primera fecha 3" class="promo-image">
+                    </div>
+
+                    <div class="info-block">
+                        <h4>📝 Formulario de Inscripción</h4>
+                        <p>Para participar, todos los pilotos deben completar el siguiente formulario de inscripción online. ¡No te quedes fuera!</p>
+                        <p><a href="https://docs.google.com/forms/d/e/1FAIpQLSeWIYk2r4kb9vmloOajxfdS9poSNXl_CKBE3R8XalyS2Afrsw/viewform" target="_blank">Acceder al Formulario de Inscripción aquí</a></p>
+                        <p><strong>Importante:</strong> Los participantes menores de edad deben descargar, imprimir y firmar el siguiente permiso notarial. Una vez firmado, deben adjuntarlo en el formulario de inscripción.</p>
+                        <p><a href="https://drive.google.com/file/d/14XigYJ0jJ9JHEXDmyZ4KIGNwbAd9J1WG/view?usp=sharing" target="_blank">Descargar Permiso Notarial para Menores de Edad</a></p>
+                    </div>
+
                     <div class="location-grid">
                         <div class="info-block" style="margin-top: 0;">
                             <h4>📍 Ubicación del Evento</h4>
-                            <p>El Campeonato Extremo Sur se lleva a cabo en los desafiantes terrenos de Punta Arenas. Un escenario único que promete emoción y adrenalina para pilotos y espectadores por igual. ¡Te esperamos para vivir la pasión del Off-Road!</p>
-                            <p><strong>Dirección estimada:</strong> Ruta 9 Km 15, Punta Arenas.</p>
+                            <p>El Campeonato Extremo Sur se lleva a cabo en los desafiantes terrenos de Punta Arenas. Un escenario único que promete emoción y adrenalina para pilotos y espectadores por igual.</p>
+                            <p><strong>Ubicación:</strong> Barrio Industrial - Motosromp Ricardo Navarro, Punta Arenas.</p>
                         </div>
                         <div class="map-container">
                             <div class="map-responsive">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d80318.23235949539!2d-70.9859524410189!3d-53.15312155776099!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xbdb2c042e6978593%3A0x2885971a5d25916!2sPunta%20Arenas%2C%20Magallanes%20y%20la%20Ant%C3%A1rtica%20Chilena!5e0!3m2!1ses-419!2scl!4v1725033481605!5m2!1ses-419!2scl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10669.6592113843!2d-70.90331213469288!3d-53.09903217408821!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xbdb265c8421abf99%3A0x1068adc145e6e1c!2sMotodromo%20Barrio%20Industrial%2C%20Ricardo%20Navarro%20Carcamo!5e0!3m2!1ses-419!2scl!4v1758503147799!5m2!1ses-419!2scl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                             </div>
                         </div>
                     </div>
                     <div class="info-block">
-                        <h4>📄 Reglamento Oficial</h4>
-                        <p>Es fundamental que todos los participantes y equipos revisen el reglamento oficial del campeonato para conocer las bases, categorías, normas de seguridad y puntajes. Asegúrate de estar al tanto de todas las disposiciones.</p>
-                        <p><a href="#" class="nav-link" data-target="page-reglamento">Descargar y leer el Reglamento aquí</a></p>
+                        <h4>💰 Datos de Pago Inscripción</h4>
+                        <div class="payment-container">
+                            <div class="payment-details">
+                                <ul>
+                                    <li><strong>Nombre:</strong> Hielo Sur Moto Club</li>
+                                    <li><strong>Banco:</strong> Banco de Crédito e Inversiones (BCI)</li>
+                                    <li><strong>Cuenta Corriente:</strong> 70617856</li>
+                                    <li><strong>RUT:</strong> 65.208.930-5</li>
+                                </ul>
+                            </div>
+                            <div class="registration-fees">
+                                <p><strong>Valores de inscripción:</strong></p>
+                                <ul>
+                                    <li>Categoría Adultos: <strong>$45.000</strong></li>
+                                    <li>Categoría Infantil: <strong>$35.000</strong></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="info-block">
+                        <h4>📄 Reglamento Oficial</h4>
+                        <p>Es fundamental que todos los participantes y equipos revisen los reglamentos oficiales para conocer las bases, categorías, normas de seguridad y puntajes. Asegúrate de estar al tanto de todas las disposiciones.</p>
+                        <p><a href="https://drive.google.com/file/d/1bGM3QbOVRUGQBOv3-aBdtnZB4RGJfq-X/view" target="_blank">Ver Reglamento Oficial Enduro 2025-2026</a></p>
+                        <p><a href="https://drive.google.com/file/d/12WTowaBLOOw4YzOG2hoM6SI8ckhZE3JT/view" target="_blank">Ver Reglamento Oficial Cross 2025-2026</a></p>
+                    </div>
+
                     <div class="info-block">
                         <h4>📞 Contacto</h4>
                         <p>Si tienes dudas, consultas o necesitas asistencia, no dudes en contactarnos. Nuestro equipo estará encantado de ayudarte con cualquier requerimiento relacionado con el campeonato.</p>
@@ -841,25 +979,21 @@
                     <div class="clubs-grid">
                         <div class="club-card">
                             <h3>ENDUCROSS MOTO CLUB</h3>
-                            <p>Descripción ficticia del club. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                             <img src="auspicios/logo_enducross_moto_club.jpeg" alt="Logo ENDUCROSS MOTO CLUB">
                             <a href="https://www.instagram.com/enducross_motoclub/" target="_blank" class="club-instagram-link"><i class="fab fa-instagram"></i></a>
                         </div>
                         <div class="club-card">
                             <h3>HIELO SUR MOTO CLUB</h3>
-                            <p>Descripción ficticia del club. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                             <img src="auspicios/logo_hielo_sur_moto_club.jpeg" alt="Logo HIELO SUR MOTO CLUB">
                             <a href="https://www.instagram.com/hielosurmc/" target="_blank" class="club-instagram-link"><i class="fab fa-instagram"></i></a>
                         </div>
                         <div class="club-card">
                             <h3>PATAGONIA MOTO CLUB</h3>
-                            <p>Descripción ficticia del club. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                             <img src="auspicios/logo_patagonia_moto_club.jpeg" alt="Logo PATAGONIA MOTO CLUB">
                             <a href="https://www.instagram.com/patagoniamotoclub/" target="_blank" class="club-instagram-link"><i class="fab fa-instagram"></i></a>
                         </div>
                         <div class="club-card">
                             <h3>CLUB DE MOTOCICLISMO PUERTO NATALES</h3>
-                            <p>Descripción ficticia del club. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                             <img src="auspicios/logo_club_motociclismo_puertonatales.jpeg" alt="Logo CLUB DE MOTOCICLISMO PUERTO NATALES">
                             <a href="#" target="_blank" class="club-instagram-link"><i class="fab fa-instagram"></i></a>
                         </div>
@@ -867,23 +1001,65 @@
                 </div>
             </section>
             
-            <section class="video-section">
+<section class="multimedia-section">
                 <div class="container">
                     <div class="center-title">
-                        <h2 class="section-title">Videos Destacados</h2>
+                        <h2 class="section-title">Multimedia</h2>
                     </div>
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/ianI0icQZfw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+
+                            <div class="swiper-slide">
+                                <div class="slide-content">
+                                    <iframe src="https://www.youtube.com/embed/ianI0icQZfw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="slide-content">
+                                    <img src="multimedia/multimedia_1.jpeg" alt="Actividades del campeonato" />
+                                </div>
+                            </div>
+
+                             <div class="swiper-slide">
+                                <div class="slide-content">
+                                    <img src="multimedia/multimedia_2.jpeg" alt="Pilotos en acción" />
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="slide-content">
+                                    <img src="multimedia/multimedia_3.jpeg" alt="Terreno de la competencia" />
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="slide-content">
+                                    <img src="multimedia/multimedia_4.jpeg" alt="Vista del circuito" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
                     </div>
                 </div>
             </section>
 
-        </div> <div id="page-reglamento" class="page-view">
+        </div> 
+        
+        <div id="page-reglamento" class="page-view">
             <div class="container">
                 <div class="center-title">
-                    <h2 class="section-title">Reglamento</h2>
+                    <h2 class="section-title">Reglamento Oficial 2025-2026</h2>
                 </div>
-                <p class="placeholder-text">El reglamento oficial del campeonato estará disponible próximamente en esta sección.</p>
+                <div class="info-block" style="text-align:center; max-width: 800px; margin: 0 auto;">
+                    <h4>Descarga los Documentos Oficiales</h4>
+                    <p>Asegúrate de leer detenidamente el reglamento correspondiente a la(s) disciplina(s) en la(s) que participarás. El cumplimiento de las normativas es obligatorio para todos los pilotos.</p>
+                    <p><a href="https://drive.google.com/file/d/1bGM3QbOVRUGQBOv3-aBdtnZB4RGJfq-X/view" target="_blank">Descargar Reglamento Oficial ENDURO 2025-2026</a></p>
+                    <p><a href="https://drive.google.com/file/d/12WTowaBLOOw4YzOG2hoM6SI8ckhZE3JT/view" target="_blank">Descargar Reglamento Oficial CROSS 2025-2026</a></p>
+                </div>
             </div>
         </div>
 
@@ -1031,7 +1207,7 @@
             <div class="footer-content">
                 <div class="footer-item">
                     <h4>CAMPEONATO EXTREMO SUR</h4>
-                    <p>&copy; 2024 - Todos los derechos e imágenes reservados.</p>
+                    <p>© 2024 - Todos los derechos e imágenes reservados.</p>
                 </div>
                 <div class="footer-item">
                     <h4>CONTACTO CAMPEONATO</h4>
@@ -1046,6 +1222,8 @@
             </div>
         </div>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
         // --- SCRIPT PARA LA CUENTA REGRESIVA ---
@@ -1076,10 +1254,26 @@
 
             }, 1000);
         }
-        startCountdown();
-    </script>
+        
+        // --- SCRIPT PARA INICIALIZAR EL CARRUSEL MULTIMEDIA ---
+        function initializeSwiper() {
+            new Swiper('.swiper-container', {
+                loop: true,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            });
+        }
 
-    <script>
         // --- SCRIPT DE NAVEGACIÓN Y MENÚ MÓVIL ---
         document.addEventListener('DOMContentLoaded', function() {
             const navLinks = document.querySelectorAll('.nav-link');
@@ -1110,7 +1304,6 @@
                 if (targetView) {
                     targetView.style.display = 'block';
                 } else {
-                    // Si no se encuentra la vista, mostrar inicio por defecto
                     document.getElementById('page-inicio').style.display = 'block';
                 }
                 
@@ -1131,7 +1324,11 @@
             hamburgerBtn.addEventListener('click', () => toggleMobileMenu());
             pageOverlay.addEventListener('click', () => toggleMobileMenu(true));
 
-            // Mostrar la vista de inicio por defecto al cargar la página
+            // Iniciar funcionalidades
+            startCountdown();
+            initializeSwiper();
+            
+            // Mostrar la vista de inicio por defecto
             showView('page-inicio');
         });
     </script>
