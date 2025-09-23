@@ -175,18 +175,52 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.6);
             z-index: 2;
         }
 
-        .hero-section .hero-text {
+        .hero-content-wrapper {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: 3;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 30px;
+            box-sizing: border-box;
+        }
+
+        .hero-top-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-top-info .logo-hero {
+            width: 150px;
+        }
+
+        .hero-top-info .instagram-hero-link {
+            color: white;
+            font-size: 2.5rem;
+            text-decoration: none;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .hero-top-info .instagram-hero-link:hover {
+            color: #E4405F;
+            transform: scale(1.1);
+        }
+        
+        .hero-section .hero-text {
             text-align: center;
+            align-self: center;
             width: 90%;
+            margin: 0 auto;
         }
 
         .hero-section .hero-text h1 {
@@ -200,8 +234,64 @@
             font-size: 1.5rem;
             font-family: var(--font-cuerpo);
             text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+            margin-bottom: 30px;
+        }
+        
+        .hero-cta-button {
+            background-color: var(--color-principal);
+            color: white;
+            padding: 15px 35px;
+            font-family: var(--font-titulos);
+            font-size: 1.5rem;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s, transform 0.3s;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border: 2px solid transparent;
         }
 
+        .hero-cta-button:hover {
+            background-color: #fff;
+            color: var(--color-principal);
+            border-color: var(--color-principal);
+            transform: translateY(-3px);
+        }
+
+        /* --- NUEVA SECCIÓN INSCRIPCIÓN --- */
+        .inscription-cta-section {
+            padding: 60px 20px;
+            background-color: var(--color-light-gray);
+        }
+
+        .inscription-cta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .inscription-cta-text h2 {
+            font-size: 2.8rem;
+            color: var(--color-principal);
+            margin-top: 0;
+            line-height: 1.2;
+        }
+
+        .inscription-cta-text p {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .inscription-cta-image img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
         /* --- SECCIÓN FECHAS (INICIO) --- */
         .dates-section {
             padding: 60px 20px;
@@ -444,34 +534,29 @@
         }
 
         .swiper-container {
-            position: relative; /* Necesario para que las flechas se posicionen respecto a él */
+            position: relative;
             width: 100%;
             max-width: 1000px;
             margin: 0 auto;
             border-radius: 8px;
             border: 5px solid var(--color-dark-bg);
-            /* Añadimos overflow hidden para que las esquinas redondeadas se apliquen bien */
             overflow: hidden; 
-            aspect-ratio: 16 / 9; /* ¡La clave! Le da la altura correcta */
+            aspect-ratio: 16 / 9;
 
         }
 
-        /* Contenedor principal de cada slide */
         .swiper-slide {
-            background-color: #000; /* Un fondo negro base */
+            background-color: #000;
         }
 
-        /* NUEVO: Este es el contenedor que asegura el tamaño uniforme */
         .swiper-slide .slide-content {
             position: relative;
             width: 100%;
-            /* Proporción 16:9 - Esta es la clave para la altura consistente */
             padding-bottom: 56.25%; 
-            height: 0; /* Necesario para que el truco del padding funcione */
+            height: 0;
             overflow: hidden;
         }
 
-        /* NUEVO: Estilo unificado para que imágenes y videos llenen el contenedor */
         .swiper-slide .slide-content img,
         .swiper-slide .slide-content iframe {
             position: absolute;
@@ -479,46 +564,36 @@
             left: 0;
             width: 100%;
             height: 100%;
-            /* ¡Esta es la magia! Hace que la imagen cubra todo el espacio sin deformarse */
             object-fit: cover; 
-            border: none; /* Quita cualquier borde del iframe */
+            border: none;
         }
 
-        /* --- ESTILOS MEJORADOS PARA LOS CONTROLES DEL CARRUSEL --- */
-
-        /* Posicionamiento y estilo de las Flechas (Izquierda y Derecha) */
         .swiper-button-next,
         .swiper-button-prev {
-            /* Usamos las variables de Swiper para el tamaño y color */
-            --swiper-navigation-size: 35px; /* Tamaño de la flecha */
-            --swiper-navigation-color: #ffffff; /* Color de la flecha: blanco */
+            --swiper-navigation-size: 35px;
+            --swiper-navigation-color: #ffffff;
 
-            background-color: rgba(0, 0, 0, 0.3); /* Fondo semitransparente para que resalte */
-            width: 50px; /* Ancho del área del botón */
-            height: 50px; /* Alto del área del botón */
-            border-radius: 50%; /* Lo hacemos circular */
-            transition: background-color 0.3s ease; /* Transición suave al pasar el mouse */
+            background-color: rgba(0, 0, 0, 0.3);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
         }
 
-        /* Efecto hover para cuando el usuario pasa el mouse por encima */
         .swiper-button-next:hover,
         .swiper-button-prev:hover {
             background-color: rgba(0, 0, 0, 0.6);
         }
 
-
-        /* Estilo de los Puntos de Paginación (los círculos de abajo) */
         .swiper-pagination {
-            /* Con estas variables, le damos nuestro color principal a los puntos */
-            --swiper-pagination-color: var(--color-principal); /* Color del punto activo */
-            --swiper-pagination-bullet-inactive-color: #f0c1c1; /* Color de los puntos inactivos */
+            --swiper-pagination-color: var(--color-principal);
+            --swiper-pagination-bullet-inactive-color: #f0c1c1;
             --swiper-pagination-bullet-inactive-opacity: 0.5;
             
-            /* Fondo para asegurar que los puntos se vean sobre cualquier imagen */
             background-color: rgba(0, 0, 0, 0.25);
-            padding: 5px 0; /* Un poco de espacio interno */
-            border-radius: 0 0 8px 8px; /* Redondeamos las esquinas inferiores */
-            position: absolute; /* Nos aseguramos que quede abajo */
+            padding: 5px 0;
+            border-radius: 0 0 8px 8px;
+            position: absolute;
             bottom: 0 !important;
         }
         
@@ -607,6 +682,9 @@
             font-size: 1.2rem;
             color: #666;
             padding: 40px 0;
+            background-color: white;
+            border-radius: 8px;
+            margin-top: 30px;
         }
 
         .results-category-grid {
@@ -633,67 +711,7 @@
             background-color: var(--color-principal);
             transform: translateY(-5px);
         }
-
-        .ranking-top3 {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 50px;
-            flex-wrap: wrap;
-        }
-
-        .pilot-card {
-            background-color: white;
-            border-radius: 10px;
-            text-align: center;
-            padding: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-            width: 250px;
-        }
-
-        .pilot-card:hover {
-            transform: scale(1.05);
-        }
-
-        .pilot-card img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid;
-        }
-
-        .pilot-card.p1 img { border-color: #FFD700; }
-        .pilot-card.p2 img { border-color: #C0C0C0; }
-        .pilot-card.p3 img { border-color: #CD7F32; }
-        .pilot-card h3 { margin: 15px 0 5px 0; font-size: 1.5rem; }
-        .pilot-card .place { font-size: 1.2rem; font-weight: bold; color: var(--color-principal); }
-
-        .results-table-wrapper { overflow-x: auto; }
-
-        .results-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        .results-table th,
-        .results-table td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: center;
-        }
-
-        .results-table th {
-            background-color: var(--color-dark-bg);
-            color: white;
-            font-family: var(--font-titulos);
-        }
-
-        .results-table tbody tr:nth-child(even) { background-color: #f9f9f9; }
-        .results-table tbody tr:hover { background-color: #f1f1f1; }
-
+        
         /* --- FOOTER --- */
         .main-footer {
             background-color: var(--color-dark-bg);
@@ -787,13 +805,19 @@
                 display: none;
             }
             
+            .hero-content-wrapper { padding: 20px; }
+            .hero-top-info .logo-hero { width: 120px; }
+            .hero-top-info .instagram-hero-link { font-size: 2.2rem; }
             .hero-section .hero-text h1 { font-size: 2.5rem; }
-            .hero-section .hero-text p { font-size: 1.2rem; }
+            .hero-section .hero-text p { font-size: 1.2rem; margin-bottom: 20px; }
+            .hero-cta-button { font-size: 1.2rem; padding: 12px 25px; }
+
+            .inscription-cta-grid { grid-template-columns: 1fr; }
+            .inscription-cta-text { text-align: center; }
+            .inscription-cta-text h2 { font-size: 2.2rem; }
+            .inscription-cta-image { order: -1; } /* Pone la imagen arriba en móvil */
+            
             .dates-grid { grid-template-columns: 1fr; }
-            .ranking-top3 { flex-direction: column; align-items: center; }
-            .ranking-top3 .p1 { order: 1; }
-            .ranking-top3 .p2 { order: 2; }
-            .ranking-top3 .p3 { order: 3; }
 
             .location-grid {
                 grid-template-columns: 1fr;
@@ -821,16 +845,16 @@
             }
         }
         .payment-container {
-        display: flex; /* Activa el modo Flexbox */
-        justify-content: space-between; /* Empuja los elementos a los extremos */
-        flex-wrap: wrap; /* Permite que se apilen en pantallas pequeñas */
-        gap: 20px; /* Añade un espacio entre ellos */
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 20px;
         }
 
         .payment-details,
         .registration-fees {
-        flex: 1; /* Hace que ambos grupos compartan el espacio disponible */
-        min-width: 250px; /* Ancho mínimo antes de que se apilen verticalmente */
+        flex: 1;
+        min-width: 250px;
         }
     </style>
 </head>
@@ -863,9 +887,33 @@
                     <div class="gallery-item"><img src="wallpapers/wallpaper_4.png" alt="Imagen de Enduro 4"></div>
                     <div class="gallery-item"><img src="wallpapers/wallpaper_5.png" alt="Imagen de Enduro 5"></div>
                 </div>
-                <div class="hero-text">
-                    <h1>CAMPEONATO EXTREMO SUR - MAGALLANES</h1>
-                    <p>El campeonato más desafiante de la Patagonia</p>
+                <div class="hero-content-wrapper">
+                    <div class="hero-top-info">
+                        <img src="promocionales/logo_campeonato_extremo_sur.png" alt="Logo Campeonato Extremo Sur" class="logo-hero">
+                        <a href="https://www.instagram.com/extremosur_mag?igsh=MW54czN1bDJia3loMg%3D%3D&utm_source=qr" target="_blank" class="instagram-hero-link" aria-label="Instagram Oficial">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                    <div class="hero-text">
+                        <h1>CAMPEONATO EXTREMO SUR - MAGALLANES</h1>
+                        <p>El campeonato más desafiante de la Patagonia</p>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeWIYk2r4kb9vmloOajxfdS9poSNXl_CKBE3R8XalyS2Afrsw/viewform" target="_blank" class="hero-cta-button">¡INSCRÍBETE AQUÍ!</a>
+                    </div>
+                    <div></div> </div>
+            </section>
+
+            <section class="inscription-cta-section">
+                <div class="container">
+                    <div class="inscription-cta-grid">
+                        <div class="inscription-cta-text">
+                            <h2>¡No te quedes fuera!</h2>
+                            <p>Las inscripciones para la temporada 2025-2026 ya están abiertas. Asegura tu lugar en la parrilla de salida y prepárate para vivir la adrenalina al máximo. ¡Haz clic en el botón y completa el formulario!</p>
+                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeWIYk2r4kb9vmloOajxfdS9poSNXl_CKBE3R8XalyS2Afrsw/viewform" target="_blank" class="hero-cta-button">Acceder al Formulario</a>
+                        </div>
+                        <div class="inscription-cta-image">
+                            <img src="promocionales/promocional_campeonato_2025_fecha_1_1.jpeg" alt="Piloto de motocross en acción">
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -919,7 +967,7 @@
                         <p>Para participar, todos los pilotos deben completar el siguiente formulario de inscripción online. ¡No te quedes fuera!</p>
                         <p><a href="https://docs.google.com/forms/d/e/1FAIpQLSeWIYk2r4kb9vmloOajxfdS9poSNXl_CKBE3R8XalyS2Afrsw/viewform" target="_blank">Acceder al Formulario de Inscripción aquí</a></p>
                         <p><strong>Importante:</strong> Los participantes menores de edad deben descargar, imprimir y firmar el siguiente permiso notarial. Una vez firmado, deben adjuntarlo en el formulario de inscripción.</p>
-                        <p><a href="https://drive.google.com/file/d/14XigYJ0jJ9JHEXDmyZ4KIGNwbAd9J1WG/view?usp=sharing" target="_blank">Descargar Permiso Notarial para Menores de Edad</a></p>
+                        <p><a href="https://drive.google.com/file/d/1K7w9Umz_5-A340pbcuyUGQjM1aQj8pO5/view?usp=sharing" target="_blank">Descargar Permiso Notarial para Menores de Edad</a></p>
                     </div>
 
                     <div class="location-grid">
@@ -1101,9 +1149,9 @@
                 </p>
                 <div class="champions-grid">
                     <div class="champion-card"><img src="campeones/sebastian_alvarez.jpeg" alt="Foto de Sebastian Alvarez" class="champion-photo"><h4 class="champion-name">Sebastian Alvarez</h4><p class="champion-category">Experto</p></div>
-                    <div class="champion-card"><img src="campeones/pablo_paredes.jpeg" alt="Foto de Pablo Paredes" class="champion-photo"><h4 class="champion-name">Pablo Paredes</h4><p class="champion-category">Open</p></div>
+                    <div class="champion-card"><img src="campeones/pablo_paredes_gallegos.jpeg" alt="Foto de Pablo Paredes" class="champion-photo"><h4 class="champion-name">Pablo Paredes Gallegos</h4><p class="champion-category">Open</p></div>
                     <div class="champion-card"><img src="campeones/diego_alvarez.jpeg" alt="Foto de Diego Alvarez" class="champion-photo"><h4 class="champion-name">Diego Alvarez</h4><p class="champion-category">Master A</p></div>
-                    <div class="champion-card"><img src="campeones/pablo_paredes.jpeg" alt="Foto de Pablo Paredes" class="champion-photo"><h4 class="champion-name">Pablo Paredes</h4><p class="champion-category">Master C</p></div>
+                    <div class="champion-card"><img src="campeones/pablo_paredes_isla.jpeg" alt="Foto de Pablo Paredes" class="champion-photo"><h4 class="champion-name">Pablo Paredes Isla</h4><p class="champion-category">Master C</p></div>
                     <div class="champion-card"><img src="campeones/branko_lefoll.jpeg" alt="Foto de Branko Lefoll" class="champion-photo"><h4 class="champion-name">Branko Lefoll</h4><p class="champion-category">Promocional</p></div>
                     <div class="champion-card"><img src="campeones/bastian_vargas.jpeg" alt="Foto de Bastian Vargas" class="champion-photo"><h4 class="champion-name">Bastian Vargas</h4><p class="champion-category">ATV Experto</p></div>
                     <div class="champion-card"><img src="campeones/vicente_krautz_1.jpeg" alt="Foto de Vicente Krautz" class="champion-photo"><h4 class="champion-name">Vicente Krautz</h4><p class="champion-category">ATV Open</p></div>
@@ -1111,7 +1159,7 @@
                     <div class="champion-card"><img src="campeones/ciro_diaz.jpeg" alt="Foto de Ciro Diaz" class="champion-photo"><h4 class="champion-name">Ciro Diaz</h4><p class="champion-category">50 Mini</p></div>
                     <div class="champion-card"><img src="campeones/santiago_toro.jpeg" alt="Foto de Santiago Toro" class="champion-photo"><h4 class="champion-name">Santiago Toro</h4><p class="champion-category">50CC</p></div>
                     <div class="champion-card"><img src="campeones/jeremias_aguilar.jpeg" alt="Foto de Jeremias Aguilar" class="champion-photo"><h4 class="champion-name">Jeremias Aguilar</h4><p class="champion-category">65CC</p></div>
-                    <div class="champion-card"><img src="campeones/pablo_paredes.jpeg" alt="Foto de Pablo Paredes" class="champion-photo"><h4 class="champion-name">Pablo Paredes</h4><p class="champion-category">85CC</p></div>
+                    <div class="champion-card"><img src="campeones/pablo_paredes_gallegos.jpeg" alt="Foto de Pablo Paredes" class="champion-photo"><h4 class="champion-name">Pablo Paredes Gallegos</h4><p class="champion-category">85CC</p></div>
                     <div class="champion-card"><img src="campeones/ludmila_roman.jpeg" alt="Foto de Ludmila Roman" class="champion-photo"><h4 class="champion-name">Ludmila Roman</h4><p class="champion-category">ATV 125B</p></div>
                     <div class="champion-card"><img src="campeones/diego_diaz.jpeg" alt="Foto de Diego Diaz" class="champion-photo"><h4 class="champion-name">Diego Diaz</h4><p class="champion-category">ATV 125 Pro</p></div>
                 </div>
@@ -1125,8 +1173,8 @@
                     <div class="champion-card"><img src="campeones/carlos_alarcon.jpeg" alt="Foto de Carlos Alarcon" class="champion-photo"><h4 class="champion-name">Carlos Alarcon</h4><p class="champion-category">Open</p></div>
                     <div class="champion-card"><img src="campeones/rodrigo_gonzalez.jpeg" alt="Foto de Rodrigo Gonzalez" class="champion-photo"><h4 class="champion-name">Rodrigo Gonzalez</h4><p class="champion-category">Master A</p></div>
                     <div class="champion-card"><img src="campeones/humberto_pacheco.jpeg" alt="Foto de Humberto Pacheco" class="champion-photo"><h4 class="champion-name">Humberto Pacheco</h4><p class="champion-category">Master B</p></div>
-                    <div class="champion-card"><img src="campeones/pablo_paredes.jpeg" alt="Foto de Pablo Paredes" class="champion-photo"><h4 class="champion-name">Pablo Paredes</h4><p class="champion-category">Master C</p></div>
-                    <div class="champion-card"><img src="campeones/pablo_paredes.jpeg" alt="Foto de Pablo Paredes" class="champion-photo"><h4 class="champion-name">Pablo Paredes</h4><p class="champion-category">Promocional</p></div>
+                    <div class="champion-card"><img src="campeones/pablo_paredes_isla.jpeg" alt="Foto de Pablo Paredes" class="champion-photo"><h4 class="champion-name">Pablo Paredes Isla</h4><p class="champion-category">Master C</p></div>
+                    <div class="champion-card"><img src="campeones/pablo_paredes_gallegos.jpeg" alt="Foto de Pablo Paredes" class="champion-photo"><h4 class="champion-name">Pablo Paredes Gallegos</h4><p class="champion-category">Promocional</p></div>
                     <div class="champion-card"><img src="campeones/gonzalo_marquez.jpeg" alt="Foto de Gonzalo Marquez" class="champion-photo"><h4 class="champion-name">Gonzalo Marquez</h4><p class="champion-category">ATV Experto</p></div>
                     <div class="champion-card"><img src="campeones/pablo_vera.jpeg" alt="Foto de Pablo Vera" class="champion-photo"><h4 class="champion-name">Pablo Vera</h4><p class="champion-category">ATV Master A</p></div>
                     <div class="champion-card"><img src="campeones/walter_brauning.jpeg" alt="Foto de Walter Brauning" class="champion-photo"><h4 class="champion-name">Walter Brauning</h4><p class="champion-category">ATV Master B</p></div>
@@ -1135,7 +1183,7 @@
                     <div class="champion-card"><img src="campeones/lukas_buljan.jpeg" alt="Foto de Lukas Buljan" class="champion-photo"><h4 class="champion-name">Lukas Buljan</h4><p class="champion-category">ATV Promocional</p></div>
                     <div class="champion-card"><img src="campeones/milan_beros.jpeg" alt="Foto de Milan Beros" class="champion-photo"><h4 class="champion-name">Milan Beros</h4><p class="champion-category">50 Mini</p></div>
                     <div class="champion-card"><img src="campeones/jose_tomas_miranda.jpeg" alt="Foto de Jose Tomas Miranda" class="champion-photo"><h4 class="champion-name">Jose Tomas Miranda</h4><p class="champion-category">65CC</p></div>
-                    <div class="champion-card"><img src="campeones/pablo_paredes.jpeg" alt="Foto de Pablo Paredes" class="champion-photo"><h4 class="champion-name">Pablo Paredes</h4><p class="champion-category">85CC</p></div>
+                    <div class="champion-card"><img src="campeones/pablo_paredes_gallegos.jpeg" alt="Foto de Pablo Paredes" class="champion-photo"><h4 class="champion-name">Pablo Paredes Gallegos</h4><p class="champion-category">85CC</p></div>
                     <div class="champion-card"><img src="campeones/esteban_paredes.jpeg" alt="Foto de Esteban Paredes" class="champion-photo"><h4 class="champion-name">Esteban Paredes</h4><p class="champion-category">ATV 125B</p></div>
                     <div class="champion-card"><img src="campeones/isidora_solis.jpeg" alt="Foto de Isidora Solis" class="champion-photo"><h4 class="champion-name">Isidora Solis</h4><p class="champion-category">ATV 125 Pro</p></div>
                     <div class="champion-card"><img src="campeones/vicente_vidal.jpeg" alt="Foto de Vicente Vidal" class="champion-photo"><h4 class="champion-name">Vicente Vidal</h4><p class="champion-category">ATV 125A</p></div>
@@ -1149,41 +1197,7 @@
                 <div class="center-title">
                     <h2 class="section-title">Resultados: ATV Experto</h2>
                 </div>
-                <div class="ranking-top3">
-                    <div class="pilot-card p2"><img src="pilotos/piloto_2.jpeg" alt="Foto de Ignacio Diaz">
-                        <h3>Ignacio Diaz</h3>
-                        <p class="place">2do Lugar - 208 Puntos</p>
-                    </div>
-                    <div class="pilot-card p1"><img src="pilotos/piloto_1.jpeg" alt="Foto de Bastian Vargas">
-                        <h3>Bastian Vargas</h3>
-                        <p class="place">1er Lugar - 214 Puntos</p>
-                    </div>
-                    <div class="pilot-card p3"><img src="pilotos/piloto_3.jpeg" alt="Foto de Gonzalo Marquez">
-                        <h3>Gonzalo Marquez</h3>
-                        <p class="place">3er Lugar - 134 Puntos</p>
-                    </div>
-                </div>
-                <div class="results-table-wrapper">
-                    <table class="results-table">
-                        <thead>
-                            <tr>
-                                <th>Categoría</th><th>N°</th><th>Nombre Piloto</th><th>1ª Fecha</th><th>2ª Fecha</th><th>3ª Fecha</th><th>4ª Fecha</th><th>5ª Fecha</th><th>6ª Fecha</th><th>Total</th><th>Lugar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>ATV EXPERTO</td><td>106</td><td>BASTIAN VARGAS</td><td>40</td><td>34</td><td>40</td><td>30</td><td>40</td><td>30</td><td>214</td><td>1</td></tr>
-                            <tr><td>ATV EXPERTO</td><td>2</td><td>IGNACIO DIAZ</td><td>34</td><td>40</td><td>34</td><td>40</td><td>34</td><td>26</td><td>208</td><td>2</td></tr>
-                            <tr><td>ATV EXPERTO</td><td>43</td><td>GONZALO MARQUEZ</td><td>22</td><td>22</td><td>22</td><td>26</td><td>22</td><td>20</td><td>134</td><td>3</td></tr>
-                            <tr><td>ATV EXPERTO</td><td>1</td><td>IVAN PABLO CUEVAS</td><td>30</td><td>30</td><td>N/P</td><td>N/P</td><td>40</td><td>DNS</td><td>110</td><td>4</td></tr>
-                            <tr><td>ATV EXPERTO</td><td>82</td><td>CRISTOBAL PEREDO</td><td>16</td><td>26</td><td>N/P</td><td>20</td><td>DNF</td><td>34</td><td>96</td><td>5</td></tr>
-                            <tr><td>ATV EXPERTO</td><td>46</td><td>DANIEL CARDENAS</td><td>N/P</td><td>30</td><td>30</td><td>N/P</td><td>30</td><td>N/P</td><td>94</td><td>6</td></tr>
-                            <tr><td>ATV EXPERTO</td><td>119</td><td>DINKO VELICH</td><td>18</td><td>20</td><td>N/P</td><td>DNS</td><td>20</td><td>30</td><td>88</td><td>7</td></tr>
-                            <tr><td>ATV EXPERTO</td><td>191</td><td>PABLO ALVAREZ</td><td>N/P</td><td>N/P</td><td>40</td><td>N/P</td><td>N/P</td><td>N/P</td><td>40</td><td>9</td></tr>
-                            <tr><td>ATV EXPERTO</td><td>84</td><td>EXEQUIEL CHILOT</td><td>N/P</td><td>N/P</td><td>0</td><td>22</td><td>18</td><td>N/P</td><td>40</td><td>8</td></tr>
-                            <tr><td>ATV EXPERTO</td><td>9</td><td>RODRIGO COTO</td><td>14</td><td>N/P</td><td>N/P</td><td>DNS</td><td>22</td><td>N/P</td><td>36</td><td>10</td></tr>
-                        </tbody>
-                    </table>
-                </div>
+                <p class="placeholder-text">Aún no hay datos de resultados disponibles para esta categoría.</p>
             </div>
         </div>
 
