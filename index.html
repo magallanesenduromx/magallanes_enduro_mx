@@ -25,6 +25,10 @@
             --font-cuerpo: 'Roboto', sans-serif;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: var(--font-cuerpo);
             background-color: var(--color-fondo);
@@ -73,7 +77,7 @@
 
         /* --- HEADER Y NAVEGACIÓN --- */
         .main-header {
-            background-color: rgba(26, 26, 26, 0.9);
+            background-color: rgba(26, 26, 26, 0.95);
             padding: 10px 40px;
             position: sticky;
             top: 0;
@@ -95,6 +99,7 @@
             list-style: none;
             display: flex;
             align-items: center;
+            gap: 5px;
         }
 
         .main-nav a {
@@ -108,8 +113,27 @@
             border-radius: 4px;
         }
 
-        .main-nav a:hover {
+        .main-nav a:not(.nav-cta-button):hover {
             background-color: var(--color-principal);
+            color: white;
+        }
+
+        /* --- NUEVOS ESTILOS PARA HEADER --- */
+        .nav-icon {
+            font-size: 1.5rem;
+            padding: 15px 15px;
+        }
+
+        .nav-cta-button {
+            background-color: var(--color-principal);
+            border: 2px solid var(--color-principal);
+            border-radius: 6px;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+
+        .nav-cta-button:hover {
+            background-color: transparent;
+            border-color: white;
             color: white;
         }
 
@@ -188,32 +212,9 @@
             z-index: 3;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center; /* Centra el contenido verticalmente */
             padding: 30px;
             box-sizing: border-box;
-        }
-
-        .hero-top-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-        }
-
-        .hero-top-info .logo-hero {
-            width: 150px;
-        }
-
-        .hero-top-info .instagram-hero-link {
-            color: white;
-            font-size: 2.5rem;
-            text-decoration: none;
-            transition: transform 0.3s ease, color 0.3s ease;
-        }
-
-        .hero-top-info .instagram-hero-link:hover {
-            color: #E4405F;
-            transform: scale(1.1);
         }
         
         .hero-section .hero-text {
@@ -258,7 +259,7 @@
             transform: translateY(-3px);
         }
 
-        /* --- NUEVA SECCIÓN INSCRIPCIÓN --- */
+        /* --- SECCIÓN INSCRIPCIÓN --- */
         .inscription-cta-section {
             padding: 60px 20px;
             background-color: var(--color-light-gray);
@@ -292,6 +293,58 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }
         
+        /* --- NUEVA SECCIÓN INSTAGRAM --- */
+        .instagram-follow-section {
+            padding: 50px 20px;
+            background-color: #fff;
+        }
+        
+        .instagram-grid {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 40px;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--color-light-gray);
+            padding: 30px 40px;
+            border-radius: 12px;
+        }
+        
+        .instagram-grid img {
+            max-width: 150px;
+        }
+        
+        .instagram-info h3 {
+            font-size: 2.2rem;
+            margin: 0 0 10px 0;
+        }
+        
+        .instagram-info p {
+            font-size: 1.2rem;
+            margin: 0 0 15px 0;
+            color: #555;
+        }
+        
+        .instagram-info a {
+            font-size: 1.8rem;
+            color: var(--color-principal);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-titulos);
+            transition: color 0.3s;
+        }
+        
+        .instagram-info a:hover {
+            color: var(--color-texto);
+        }
+        
+        .instagram-info a i {
+            font-size: 2.5rem;
+        }
+
         /* --- SECCIÓN FECHAS (INICIO) --- */
         .dates-section {
             padding: 60px 20px;
@@ -764,7 +817,7 @@
         }
 
         /* --- MEDIA QUERIES PARA RESPONSIVE DESIGN --- */
-        @media (max-width: 768px) {
+        @media (max-width: 992px) {
             .main-header {
                 padding: 10px 20px;
             }
@@ -785,6 +838,26 @@
                 padding-top: 80px;
                 transition: right 0.4s ease-in-out;
                 z-index: 999;
+                align-items: flex-start; /* Alinea items a la izquierda en menú movil */
+            }
+
+            .main-nav .nav-links li {
+                width: 100%;
+            }
+            
+            .main-nav a, .main-nav .nav-icon {
+                padding: 15px 25px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .nav-cta-button {
+                background-color: transparent; /* Quita fondo al botón en menú móvil */
+                border: none;
+                text-align: left;
+            }
+            .nav-cta-button:hover {
+                background-color: var(--color-principal);
             }
 
             .nav-links.active {
@@ -805,9 +878,6 @@
                 display: none;
             }
             
-            .hero-content-wrapper { padding: 20px; }
-            .hero-top-info .logo-hero { width: 120px; }
-            .hero-top-info .instagram-hero-link { font-size: 2.2rem; }
             .hero-section .hero-text h1 { font-size: 2.5rem; }
             .hero-section .hero-text p { font-size: 1.2rem; margin-bottom: 20px; }
             .hero-cta-button { font-size: 1.2rem; padding: 12px 25px; }
@@ -815,8 +885,16 @@
             .inscription-cta-grid { grid-template-columns: 1fr; }
             .inscription-cta-text { text-align: center; }
             .inscription-cta-text h2 { font-size: 2.2rem; }
-            .inscription-cta-image { order: -1; } /* Pone la imagen arriba en móvil */
+            .inscription-cta-image { order: -1; }
             
+            .instagram-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 20px;
+            }
+            .instagram-grid img { margin: 0 auto; }
+            .instagram-info a { justify-content: center;}
+
             .dates-grid { grid-template-columns: 1fr; }
 
             .location-grid {
@@ -861,14 +939,24 @@
 
 <body>
     <header class="main-header">
-        <a href="#" class="nav-link" data-target="page-inicio"><img src="promocionales/logo_campeonato_extremo_sur.png" alt="Logo Campeonato Extremo Sur" class="logo"></a>
+        <a href="#page-inicio"><img src="promocionales/logo_campeonato_extremo_sur.png" alt="Logo Campeonato Extremo Sur" class="logo"></a>
         <nav class="main-nav">
             <button class="hamburger-btn" id="hamburger-btn">☰</button>
             <ul class="nav-links" id="nav-links">
-                <li><a href="#" class="nav-link" data-target="page-inicio">Inicio</a></li>
-                <li><a href="#" class="nav-link" data-target="page-reglamento">Reglamento</a></li>
-                <li><a href="#" class="nav-link" data-target="page-resultados">Resultados</a></li>
-                <li><a href="#" class="nav-link" data-target="page-campeones">Campeones</a></li>
+                <li><a href="#page-inicio">Inicio</a></li>
+                <li><a href="#page-reglamento">Reglamento</a></li>
+                <li><a href="#page-resultados">Resultados</a></li>
+                <li><a href="#page-campeones">Campeones</a></li>
+                <li>
+                    <a href="https://www.instagram.com/extremosur_mag?igsh=MW54czN1bDJia3loMg%3D%3D&utm_source=qr" target="_blank" class="nav-icon" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeWIYk2r4kb9vmloOajxfdS9poSNXl_CKBE3R8XalyS2Afrsw/viewform" target="_blank" class="nav-cta-button">
+                        Inscripción
+                    </a>
+                </li>
             </ul>
         </nav>
     </header>
@@ -888,18 +976,12 @@
                     <div class="gallery-item"><img src="wallpapers/wallpaper_5.png" alt="Imagen de Enduro 5"></div>
                 </div>
                 <div class="hero-content-wrapper">
-                    <div class="hero-top-info">
-                        <img src="promocionales/logo_campeonato_extremo_sur.png" alt="Logo Campeonato Extremo Sur" class="logo-hero">
-                        <a href="https://www.instagram.com/extremosur_mag?igsh=MW54czN1bDJia3loMg%3D%3D&utm_source=qr" target="_blank" class="instagram-hero-link" aria-label="Instagram Oficial">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </div>
                     <div class="hero-text">
                         <h1>CAMPEONATO EXTREMO SUR - MAGALLANES</h1>
                         <p>El campeonato más desafiante de la Patagonia</p>
                         <a href="https://docs.google.com/forms/d/e/1FAIpQLSeWIYk2r4kb9vmloOajxfdS9poSNXl_CKBE3R8XalyS2Afrsw/viewform" target="_blank" class="hero-cta-button">¡INSCRÍBETE AQUÍ!</a>
                     </div>
-                    <div></div> </div>
+                </div>
             </section>
 
             <section class="inscription-cta-section">
@@ -912,6 +994,22 @@
                         </div>
                         <div class="inscription-cta-image">
                             <img src="promocionales/promocional_campeonato_2025_fecha_1_1.jpeg" alt="Piloto de motocross en acción">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="instagram-follow-section">
+                <div class="container">
+                    <div class="instagram-grid">
+                        <img src="promocionales/logo_campeonato_extremo_sur.png" alt="Logo Campeonato Extremo Sur">
+                        <div class="instagram-info">
+                            <h3>SÍGUENOS EN INSTAGRAM</h3>
+                            <p>No te pierdas ninguna novedad, fotos, videos y toda la acción del campeonato.</p>
+                            <a href="https://www.instagram.com/extremosur_mag?igsh=MW54czN1bDJia3loMg%3D%3D&utm_source=qr" target="_blank">
+                                <i class="fab fa-instagram"></i>
+                                @extremosur_mag
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -1117,19 +1215,19 @@
                     <h2 class="section-title">Selecciona una Categoría</h2>
                 </div>
                 <div class="results-category-grid">
-                    <a href="#" class="nav-link category-link" data-target="view-atv-experto">ATV EXPERTO</a>
-                    <a href="#" class="nav-link category-link" data-target="view-atv-master-a">ATV MASTER A</a>
-                    <a href="#" class="nav-link category-link" data-target="view-atv-open">ATV OPEN</a>
-                    <a href="#" class="nav-link category-link" data-target="view-atv-master-b">ATV MASTER B</a>
-                    <a href="#" class="nav-link category-link" data-target="view-atv-master-c">ATV MASTER C</a>
-                    <a href="#" class="nav-link category-link" data-target="view-atv-promocional">ATV PROMOCIONAL</a>
-                    <a href="#" class="nav-link category-link" data-target="view-moto-experto">MOTO EXPERTO</a>
-                    <a href="#" class="nav-link category-link" data-target="view-moto-master-a">MOTO MASTER A</a>
-                    <a href="#" class="nav-link category-link" data-target="view-motos-open">MOTOS OPEN</a>
-                    <a href="#" class="nav-link category-link" data-target="view-moto-master-b">MOTO MASTER B</a>
-                    <a href="#" class="nav-link category-link" data-target="view-moto-master-c">MOTO MASTER C</a>
-                    <a href="#" class="nav-link category-link" data-target="view-moto-promocional">MOTO PROMOCIONAL</a>
-                    <a href="#" class="nav-link category-link" data-target="view-4x4">4X4</a>
+                    <a href="#view-atv-experto" class="category-link">ATV EXPERTO</a>
+                    <a href="#view-atv-master-a" class="category-link">ATV MASTER A</a>
+                    <a href="#view-atv-open" class="category-link">ATV OPEN</a>
+                    <a href="#view-atv-master-b" class="category-link">ATV MASTER B</a>
+                    <a href="#view-atv-master-c" class="category-link">ATV MASTER C</a>
+                    <a href="#view-atv-promocional" class="category-link">ATV PROMOCIONAL</a>
+                    <a href="#view-moto-experto" class="category-link">MOTO EXPERTO</a>
+                    <a href="#view-moto-master-a" class="category-link">MOTO MASTER A</a>
+                    <a href="#view-motos-open" class="category-link">MOTOS OPEN</a>
+                    <a href="#view-moto-master-b" class="category-link">MOTO MASTER B</a>
+                    <a href="#view-moto-master-c" class="category-link">MOTO MASTER C</a>
+                    <a href="#view-moto-promocional" class="category-link">MOTO PROMOCIONAL</a>
+                    <a href="#view-4x4" class="category-link">4X4</a>
                 </div>
             </div>
         </div>
@@ -1192,15 +1290,7 @@
             </div>
         </div>
 
-        <div id="view-atv-experto" class="page-view">
-            <div class="container">
-                <div class="center-title">
-                    <h2 class="section-title">Resultados: ATV Experto</h2>
-                </div>
-                <p class="placeholder-text">Aún no hay datos de resultados disponibles para esta categoría.</p>
-            </div>
-        </div>
-
+        <div id="view-atv-experto" class="page-view"><div class="container"><div class="center-title"><h2 class="section-title">Resultados: ATV Experto</h2></div><p class="placeholder-text">Aún no hay datos de resultados disponibles para esta categoría.</p></div></div>
         <div id="view-atv-master-a" class="page-view"><div class="container"><div class="center-title"><h2 class="section-title">Resultados: ATV Master A</h2></div><p class="placeholder-text">Aún no hay datos de resultados disponibles para esta categoría.</p></div></div>
         <div id="view-atv-open" class="page-view"><div class="container"><div class="center-title"><h2 class="section-title">Resultados: ATV Open</h2></div><p class="placeholder-text">Aún no hay datos de resultados disponibles para esta categoría.</p></div></div>
         <div id="view-atv-master-b" class="page-view"><div class="container"><div class="center-title"><h2 class="section-title">Resultados: ATV Master B</h2></div><p class="placeholder-text">Aún no hay datos de resultados disponibles para esta categoría.</p></div></div>
@@ -1240,62 +1330,90 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
-        // --- SCRIPT PARA LA CUENTA REGRESIVA ---
-        function startCountdown() {
-            const countDownDate = new Date("2025-09-27T00:00:00").getTime();
-
-            const countdownFunction = setInterval(function() {
-                const now = new Date().getTime();
-                const distance = countDownDate - now;
-
-                if (distance < 0) {
-                    clearInterval(countdownFunction);
-                    document.getElementById("countdown").innerHTML = "<h4>¡EL CAMPEONATO HA COMENZADO!</h4>";
-                    return;
-                }
-
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                const formatTime = (time) => time < 10 ? `0${time}` : time;
-
-                document.getElementById("days").innerText = formatTime(days);
-                document.getElementById("hours").innerText = formatTime(hours);
-                document.getElementById("minutes").innerText = formatTime(minutes);
-                document.getElementById("seconds").innerText = formatTime(seconds);
-
-            }, 1000);
-        }
-        
-        // --- SCRIPT PARA INICIALIZAR EL CARRUSEL MULTIMEDIA ---
-        function initializeSwiper() {
-            new Swiper('.swiper-container', {
-                loop: true,
-                autoplay: {
-                    delay: 5000,
-                    disableOnInteraction: false,
-                },
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true,
-                },
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
-            });
-        }
-
-        // --- SCRIPT DE NAVEGACIÓN Y MENÚ MÓVIL ---
         document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('.nav-link');
+            
+            // --- INICIALIZAR FUNCIONALIDADES ---
+            startCountdown();
+            initializeSwiper();
+
+            // --- VARIABLES GLOBALES DE NAVEGACIÓN ---
             const allViews = document.querySelectorAll('.page-view');
             const hamburgerBtn = document.getElementById('hamburger-btn');
             const mobileNav = document.getElementById('nav-links');
             const pageOverlay = document.getElementById('page-overlay');
 
+            // --- SCRIPT PARA LA CUENTA REGRESIVA ---
+            function startCountdown() {
+                const countDownDate = new Date("2025-09-27T00:00:00").getTime();
+                const countdownFunction = setInterval(function() {
+                    const now = new Date().getTime();
+                    const distance = countDownDate - now;
+
+                    if (distance < 0) {
+                        clearInterval(countdownFunction);
+                        document.getElementById("countdown").innerHTML = "<h4>¡EL CAMPEONATO HA COMENZADO!</h4>";
+                        return;
+                    }
+
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    const formatTime = (time) => time < 10 ? `0${time}` : time;
+
+                    document.getElementById("days").innerText = formatTime(days);
+                    document.getElementById("hours").innerText = formatTime(hours);
+                    document.getElementById("minutes").innerText = formatTime(minutes);
+                    document.getElementById("seconds").innerText = formatTime(seconds);
+
+                }, 1000);
+            }
+            
+            // --- SCRIPT PARA INICIALIZAR EL CARRUSEL MULTIMEDIA ---
+            function initializeSwiper() {
+                new Swiper('.swiper-container', {
+                    loop: true,
+                    autoplay: {
+                        delay: 5000,
+                        disableOnInteraction: false,
+                    },
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                    },
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                });
+            }
+
+            // --- NUEVO SCRIPT DE NAVEGACIÓN BASADO EN HASH ---
+            function handleNavigation() {
+                // Si no hay hash, usa #page-inicio como default
+                const hash = window.location.hash || '#page-inicio';
+                const targetId = hash.substring(1);
+
+                allViews.forEach(view => {
+                    view.style.display = 'none';
+                });
+
+                const targetView = document.getElementById(targetId);
+                
+                if (targetView) {
+                    targetView.style.display = 'block';
+                } else {
+                    // Si el hash es inválido, muestra la página de inicio
+                    document.getElementById('page-inicio').style.display = 'block';
+                }
+                
+                // Cierra el menú móvil (si está abierto) y resetea el scroll
+                toggleMobileMenu(true); 
+                window.scrollTo(0, 0);
+            }
+
+            // --- MANEJO DEL MENÚ MÓVIL ---
             function toggleMobileMenu(forceClose = false) {
                 const isActive = mobileNav.classList.contains('active');
                 if (forceClose || isActive) {
@@ -1309,41 +1427,22 @@
                 }
             }
             
-            function showView(targetId) {
-                allViews.forEach(view => {
-                    view.style.display = 'none';
-                });
+            // --- EVENT LISTENERS ---
+            
+            // Llama a la navegación cuando la página carga por primera vez
+            handleNavigation();
 
-                const targetView = document.getElementById(targetId);
-                if (targetView) {
-                    targetView.style.display = 'block';
-                } else {
-                    document.getElementById('page-inicio').style.display = 'block';
-                }
-                
-                toggleMobileMenu(true);
-                window.scrollTo(0, 0);
-            }
-
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('data-target');
-                    if (targetId) {
-                       showView(targetId);
-                    }
-                });
-            });
-
+            // Llama a la navegación cada vez que el hash de la URL cambia (clics, botones de navegador)
+            window.addEventListener('hashchange', handleNavigation);
+            
+            // Clics en el menú hamburguesa y el overlay
             hamburgerBtn.addEventListener('click', () => toggleMobileMenu());
             pageOverlay.addEventListener('click', () => toggleMobileMenu(true));
 
-            // Iniciar funcionalidades
-            startCountdown();
-            initializeSwiper();
-            
-            // Mostrar la vista de inicio por defecto
-            showView('page-inicio');
+            // Asegurarse de que los clics en los links del menú móvil lo cierren
+            mobileNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => toggleMobileMenu(true));
+            });
         });
     </script>
 </body>
